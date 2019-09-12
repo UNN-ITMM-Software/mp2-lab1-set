@@ -140,27 +140,13 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-	
-	int a;
-	//istr >> a;
-	while (1)
-	{
-		istr >> a;
-		if (a == -1) break;		//пока пользователь не введёт -1
-		else
-		s.InsElem(a);
-		
-	}
-	
+	istr >> s.BitField;
+	s.MaxPower = s.BitField.GetLength();
 	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-	for (int i = 0; i < s.BitField.GetLength(); i++) 
-	{
-		if (s.IsMember(i))
-			ostr << i;
-	}
+	ostr << s.BitField;
 	return ostr;
 }

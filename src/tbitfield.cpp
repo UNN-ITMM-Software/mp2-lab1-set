@@ -204,18 +204,16 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-	char str[256];
-	istr >> str;
-
-	TBitField field(strlen(str));
-	for (int i = 0; str[i] != 0; i++) 
+	int Len;
+	int tmp;
+	istr >> Len;
+	bf = TBitField(Len);
+	for (int i = 0; i < bf.BitLen; i++)
 	{
-		if (str[i] != '0')
-			field.SetBit(i);
-		else
-			field.ClrBit(i);
+		istr >> tmp;
+		if (tmp == 1)
+			bf.SetBit(i);
 	}
-	bf = field;
 	return istr;
 }
 
