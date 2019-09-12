@@ -37,7 +37,7 @@ TBitField::~TBitField()
 	if (pMem != NULL)
 	{
 		delete[] pMem;
-		pMem = nullptr;
+		pMem = NULL;
 	}
 }
 
