@@ -227,11 +227,11 @@ TEST(TBitField, can_invert_bitfield)
 {
   const int size = 2;
   TBitField bf(size), negBf(size), expNegBf(size);
-  // bf = 01
+  // bf = 10
   bf.SetBit(1);
   negBf = ~bf;
 
-  // expNegBf = 10
+  // expNegBf = 01
   expNegBf.SetBit(0);
 
   EXPECT_EQ(expNegBf, negBf);
