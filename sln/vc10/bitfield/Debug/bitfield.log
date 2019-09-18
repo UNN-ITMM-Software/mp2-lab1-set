@@ -1,0 +1,7 @@
+﻿cl : командная строка warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
+  tset.cpp
+  tbitfield.cpp
+  Создание кода...
+e:\сысоев\anisimova.p\mp2-lab1-set\src\tbitfield.cpp(159): warning C4715: TBitField::operator!=: значение возвращается не при всех путях выполнения
+e:\сысоев\anisimova.p\mp2-lab1-set\src\tbitfield.cpp(143): warning C4715: TBitField::operator==: значение возвращается не при всех путях выполнения
+  bitfield.vcxproj -> E:\Сысоев\Anisimova.P\mp2-lab1-set\sln\vc10\Debug\bitfield.lib
