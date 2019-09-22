@@ -9,11 +9,11 @@
 
 TSet::TSet(int mp) : BitField(mp)
 {
-
+	MaxPower = mp;
 }
 
 // конструктор копирования
-TSet::TSet(const TSet &s) : BitField(s.MaxPower)
+TSet::TSet(const TSet &s) : BitField(s.BitField)
 {
 	MaxPower = s.MaxPower; 
 }
@@ -41,24 +41,22 @@ int TSet::IsMember(const int Elem) const // элемент множества?
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-	
 		BitField.SetBit(Elem);
-	
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
-{
-	
+{	
 		BitField.ClrBit(Elem);
-	
 }
 
 // теоретико-множественные операции
 
 TSet& TSet::operator=(const TSet &s) // присваивание
 {
-	MaxPower = s.MaxPower;
-	BitField = s.BitField;
+	if (this != &s) {
+		MaxPower = s.MaxPower;
+		BitField = s.BitField;
+	}
 	return *this;
 }
 
@@ -69,7 +67,7 @@ int TSet::operator==(const TSet &s) const // сравнение
 
 int TSet::operator!=(const TSet &s) const // сравнение
 {
-	return (s.BitField != BitField);
+	return /*!(s.BitField = BitField);*/ !(*this == s);
 }
 
 TSet TSet::operator+(const TSet &s) // объединение
@@ -107,12 +105,10 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-	int Elem;
-	istr >> Elem;
-	while (Elem >= 0 && Elem < s.MaxPower)
-	{
-		s.InsElem(Elem);
-		istr >> Elem;
+	int n;
+	for (int i = 0; i < s.MaxPower; i++) {
+		istr >> n;
+		s.InsElem(n);
 	}
 	return istr;
 }
