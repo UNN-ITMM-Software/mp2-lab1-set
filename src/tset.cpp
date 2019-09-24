@@ -67,7 +67,7 @@ int TSet::operator==(const TSet &s) const // сравнение
 
 int TSet::operator!=(const TSet &s) const // сравнение
 {
-	return /*!(s.BitField = BitField);*/ !(*this == s);
+	return !(s.BitField == BitField); 
 }
 
 TSet TSet::operator+(const TSet &s) // объединение
@@ -113,12 +113,10 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 	return istr;
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // вывод
+ostream& operator<<(ostream &ostr, const TSet &s)	// вывод
 {
-	for (int i = 0; i < s.MaxPower; i++)
-	{
-		if (s.IsMember(i))
-			ostr << i << ' ';
-	}
+	ostr << " ";									//для более ровного вывода
+		for (int i = 0; i < s.MaxPower; i++)
+			if (s.IsMember(i))	ostr << i << " ";
 	return ostr;
 }
