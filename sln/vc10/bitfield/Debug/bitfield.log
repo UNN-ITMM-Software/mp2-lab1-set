@@ -1,0 +1,4 @@
+﻿cl : командная строка warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
+  tbitfield.cpp
+c:\users\nikita\documents\аисд\mp2-lab1-set\src\tbitfield.cpp(66): warning C4554: "&": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
+  bitfield.vcxproj -> C:\Users\Nikita\Documents\АиСД\mp2-lab1-set\sln\vc10\Debug\bitfield.lib
