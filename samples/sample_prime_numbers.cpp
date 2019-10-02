@@ -33,7 +33,8 @@ int main()
     if (s.GetBit(m))
       for (k = 2 * m; k <= n; k += m)
         if (s.GetBit(k))
-          s.ClrBit(k);
+
+			s.ClrBit(k);
   // оставшиеся в s элементы - простые числа
   cout << endl << "Печать множества некратных чисел" << endl << s << endl;
   cout << endl << "Печать простых чисел" << endl;
