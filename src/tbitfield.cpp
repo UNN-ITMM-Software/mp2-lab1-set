@@ -26,8 +26,6 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
-	for (int i = 0; i < MemLen; i++) pMem[i] = 0;
-	MemLen = BitLen = 0;
 	delete[] pMem;
 }
 
@@ -70,10 +68,17 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
-	MemLen = bf.MemLen;
-	BitLen = bf.BitLen;
-	pMem = new TELEM[MemLen];
-	for (int i = 0; i < MemLen; i++) pMem[i] = bf.pMem[i];
+	if (&bf != this)
+	{
+		if (MemLen != bf.MemLen)
+		{
+			MemLen = bf.MemLen;
+			BitLen = bf.BitLen;
+			delete[] pMem;
+			pMem = new TELEM[MemLen];
+		}
+		for (int i = 0; i < MemLen; i++) pMem[i] = bf.pMem[i];
+	}
 	return *this;
 }
 
@@ -87,10 +92,7 @@ bool TBitField::operator==(const TBitField &bf) const // сравнение
 
 bool TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-	if (BitLen != bf.BitLen)return true;
-	for (int i = 0; i < MemLen; i++)
-		if (pMem[i] != bf.pMem[i])return true;
-	return false;
+	return !(*this == bf);
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
