@@ -4,7 +4,7 @@
 //   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
 //
 // Множество - реализация через битовые поля
-//Changes for GitHub Pull Request#2
+//Changes for GitHub Pull Request#3
 #include "tset.h"
 
 TSet::TSet(int mp) : BitField(mp)
@@ -67,9 +67,7 @@ bool TSet::operator==(const TSet &s) const // сравнение
 
 bool TSet::operator!=(const TSet &s) const // сравнение
 {
-	if (MaxPower != s.MaxPower) return true;
-	if (BitField != s.BitField) return true;
-	return false;
+	return !(*this == s);
 }
 
 TSet TSet::operator+(const TSet &s) // объединение
