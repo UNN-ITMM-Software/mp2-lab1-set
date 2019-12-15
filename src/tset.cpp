@@ -1,8 +1,3 @@
-// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
-//
-// tset.cpp - Copyright (c) Гергель В.П. 04.10.2001
-//   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
-//
 // Множество - реализация через битовые поля
 
 #include "tset.h"
@@ -76,6 +71,14 @@ TSet TSet::operator+(const TSet& s) // объединение
 	return (tmp);
 }
 
+TSet TSet::operator- (const TSet& s)
+{
+	TBitField tp;
+	tp = s.BitField;
+	TSet tmp(BitField & ~tp);
+	return tmp;
+}
+
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
 	BitField.SetBit(Elem);
@@ -117,6 +120,6 @@ ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
 	for (int i = 0; i < s.MaxPower; i++)
 		if (s.BitField.GetBit(i))
-			ostr << i;
+			ostr << i << ' ';
 	return ostr;
 }

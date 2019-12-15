@@ -1,8 +1,3 @@
-// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
-//
-// tbitfield.cpp - Copyright (c) Гергель В.П. 07.05.2001
-//   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
-//
 // Битовое поле
 
 #include "tbitfield.h"
@@ -113,11 +108,11 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 	if (MemLen > bf.MemLen)
 	{
 		for (int i = minMem; i < MemLen; i++)
-			if (pMem != 0) return 0;
+			if (pMem[i] != 0) return 0;
 	}
 	else
 		for (int i = minMem; i < bf.MemLen; i++)
-			if (pMem != 0) return 0;
+			if (pMem[i] != 0) return 0;
 	return 1;
 }
 

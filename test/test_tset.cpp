@@ -197,6 +197,24 @@ TEST(TSet, can_combine_two_sets_of_equal_size)
   EXPECT_EQ(expSet, set3);
 }
 
+TEST(TSet, can_subtract_two_sets_of_equal_size)
+{
+    const int size = 5;
+    TSet set1(size), set2(size), set3(size), expSet(size);
+    // set1 = {1, 2, 4}
+    set1.InsElem(1);
+    set1.InsElem(2);
+    set1.InsElem(4);
+    // set2 = {1, 2}
+    set2.InsElem(1);
+    set2.InsElem(2);
+    set3 = set1 - set2;
+    // expSet = {4}
+    expSet.InsElem(4);
+
+    EXPECT_EQ(expSet, set3);
+}
+
 TEST(TSet, check_size_changes_of_the_combination_of_two_sets_of_non_equal_size)
 {
   const int size1 = 5, size2 = 7;
