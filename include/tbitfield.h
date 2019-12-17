@@ -33,9 +33,9 @@ public:
   int operator==(const TBitField &bf) const; // сравнение                 
   int operator!=(const TBitField &bf) const; // сравнение
   TBitField& operator=(const TBitField &bf); // присваивание              
-  TBitField  operator|(const TBitField &bf); // операция "или"            
-  TBitField  operator&(const TBitField &bf); // операция "и"              
-  TBitField  operator~(void);                // отрицание                  
+  TBitField  operator|(const TBitField &bf) const; // операция "или"            
+  TBitField  operator&(const TBitField &bf) const; // операция "и"              
+  TBitField  operator~(void) const;                // отрицание                  
 
   friend istream &operator>>(istream &istr, TBitField &bf);       // чтение из потока 
   friend ostream &operator<<(ostream &ostr, const TBitField &bf); // запись в поток

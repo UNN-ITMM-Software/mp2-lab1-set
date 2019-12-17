@@ -1,4 +1,4 @@
-// Битовое поле
+	// Битовое поле
 
 #include "tbitfield.h"
 
@@ -123,7 +123,7 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 	return 1;
 }
 
-TBitField TBitField::operator|(const TBitField &bf) // операция "или"
+TBitField TBitField::operator|(const TBitField &bf) const // операция "или"
 {
 	int Bit, MinMem;
 	TELEM* p = NULL;
@@ -152,7 +152,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 	return tmp;
 }
 
-TBitField TBitField::operator&(const TBitField& bf) // операция "и"
+TBitField TBitField::operator&(const TBitField& bf) const// операция "и"
 {
 	int MinBit;
 	if (BitLen > bf.BitLen)
@@ -171,7 +171,7 @@ TBitField TBitField::operator&(const TBitField& bf) // операция "и"
 	return tmp;
 }
 
-TBitField TBitField::operator~(void) // отрицание
+TBitField TBitField::operator~(void) const// отрицание
 {
 	TBitField tmp(BitLen);
 	for (int i = 0; i < BitLen; i++)
@@ -206,7 +206,7 @@ istream& operator>>(istream& istr, TBitField& bf) // ввод
 ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
 {
 	int len = bf.GetLength();
-	for (int i = 0; i++; i < len)
+	for (int i = 0; i < len; ++i)
 		if (bf.GetBit(i))
 			ostr << '1';
 		else

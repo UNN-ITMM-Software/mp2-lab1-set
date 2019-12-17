@@ -24,16 +24,16 @@ public:
   int operator== (const TSet &s) const; // сравнение
   int operator!= (const TSet &s) const; // сравнение
   TSet& operator=(const TSet &s);  // присваивание
-  TSet operator+ (const int Elem); // объединение с элементом
+  TSet& operator+ (const int Elem);// объединение с элементом
                                    // элемент должен быть из того же универса
-  TSet operator- (const int Elem); // разность с элементом
-                                   // элемент должен быть из того же универса
-  TSet operator+ (const TSet &s);  // объединение
-  TSet operator- (const TSet &s);  // разность
-  TSet operator* (const TSet &s);  // пересечение
-  TSet operator~ (void);           // дополнение
+  TSet& operator- (const int Elem);// разность с элементом
+                                       // элемент должен быть из того же универса
+    TSet operator+ (const TSet& s) const; // объединение
+    TSet operator- (const TSet& s) const; // разность
+    TSet operator* (const TSet& s) const; // пересечение
+    TSet operator~ (void) const;          // дополнение
 
-  friend istream &operator>>(istream &istr, TSet &bf); // чтение из потока
-  friend ostream &operator<<(ostream &ostr, const TSet &bf); // запись в поток
+  friend istream& operator>>(istream &istr, TSet &bf); // чтение из потока
+  friend ostream& operator<<(ostream& ostr, const TSet& bf);// запись в поток
 };
 #endif

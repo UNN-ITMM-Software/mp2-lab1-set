@@ -65,39 +65,37 @@ int TSet::operator!=(const TSet& s) const // сравнение
 	}
 }
 
-TSet TSet::operator+(const TSet& s) // объединение
+TSet TSet::operator+(const TSet& s) const// объединение
 {
 	TSet tmp(BitField | s.BitField);
 	return (tmp);
 }
 
-TSet TSet::operator- (const TSet& s)
+TSet TSet::operator- (const TSet& s) const
 {
-	TBitField tp;
-	tp = s.BitField;
-	TSet tmp(BitField & ~tp);
+	TSet tmp(BitField & ~s.BitField);
 	return tmp;
 }
 
-TSet TSet::operator+(const int Elem) // объединение с элементом
+TSet& TSet::operator+(const int Elem) // объединение с элементом
 {
 	BitField.SetBit(Elem);
 	return *this;
 }
 
-TSet TSet::operator-(const int Elem) // разность с элементом
+TSet& TSet::operator-(const int Elem)// разность с элементом
 {
 	BitField.ClrBit(Elem);
 	return *this;
 }
 
-TSet TSet::operator*(const TSet& s) // пересечение
+TSet TSet::operator*(const TSet& s) const// пересечение
 {
 	TSet tmp(BitField & s.BitField);
 	return (tmp);
 }
 
-TSet TSet::operator~(void) // дополнение
+TSet TSet::operator~(void) const// дополнение
 {
 	TSet tmp(~BitField);
 	return tmp;
