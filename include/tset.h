@@ -17,6 +17,7 @@ private:
   TBitField BitField; // битовое поле для хранения характеристического вектора
 public:
   TSet(int mp);
+  
   TSet(const TSet &s);       // конструктор копирования
   TSet(const TBitField &bf); // конструктор преобразования типа
   operator TBitField();      // преобразование типа к битовому полю
@@ -39,5 +40,7 @@ public:
 
   friend istream &operator>>(istream &istr, TSet &bf);
   friend ostream &operator<<(ostream &ostr, const TSet &bf);
+  
 };
+
 #endif
