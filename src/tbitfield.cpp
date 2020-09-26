@@ -168,105 +168,17 @@ TBitField TBitField::operator~(void) // отрицание
 
 // ввод/вывод
 
-void SetBit(TBitField &bf, const int n)
-{
-    bf.SetBit(n);
-}
-
-void ClrBit(TBitField& bf, const int n)
-{
-    bf.ClrBit(n);
-}
-
-TBitField create(const int n)
-{
-    TBitField tempBF(n);
-    return tempBF;
-}
-
-TBitField up(TBitField& bf, const int n)
-{
-    TBitField tempBF(bf.GetLength() + n);
-    tempBF = tempBF | bf;
-    return tempBF;
-}
-
-TBitField fill(string s)
-{
-    TBitField tempBF(s.length());
-    for (int i = 0; i < s.length(); i++)
-        if (s[i] == '1')
-            tempBF.SetBit(i);
-    return tempBF;
-}
-
-TBitField low(TBitField& bf, const int n)
-{
-    TBitField tempBF(bf.GetLength() - n);
-    for (int i = 0; i < tempBF.GetLength(); i++)
-        if (bf.GetBit(i))
-            tempBF.SetBit(i);
-    return tempBF;
-}
-
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-    map <string, void (*)(TBitField&, int)> commands_V_TI = 
-    { 
-        {"ADD", SetBit}, {"SET", SetBit},
-        {"DEL", ClrBit}, {"CLR", ClrBit}, {"DELETE", ClrBit}, {"CLEAR", ClrBit}
-    };
-    map <string, TBitField (*)(int)> commands_T_I =
-    {
-        {"NEW", create}, {"CRT", create}, {"CREATE", create}
-    };
-    map <string, TBitField(*)(TBitField&, int)> commands_T_TI =
-    {
-        {"UP", up},
-        {"LOW", low}
-    };
-    map <string, int> throws =
-    {
-        {"EXIT", -1}, {"CLOSE", -1}
-    };
-    string command;
-    istr >> command;
-    transform(command.begin(), command.end(), command.begin(), toupper);
-    if (throws.count(command) != 0)
-    {
-        throw throws[command];
-    }
-    if (command == "FILL")
-    {
-        int number;
-        for (int i = 0; i < bf.BitLen; i++)
-        {
-            istr >> number;
-            if (number == 1)
-                (commands_V_TI["ADD"])(bf, i);
-            else
-                (commands_V_TI["DEL"])(bf, i);
-        }
-        return istr;
-    }
     int number;
-    istr >> number;
-    if (commands_V_TI.count(command) == 0)
+    for (int i = 0; i < bf.BitLen; i++)
     {
-        if (commands_T_I.count(command) == 0)
-        {
-            if (commands_T_TI.count(command) == 0)
-            {
-                throw "Invalid the command";
-            }
-            else
-                bf = (commands_T_TI[command])(bf, number);
-        }
+        istr >> number;
+        if (number == 1)
+            bf.SetBit(i);
         else
-            bf = (commands_T_I[command])(number);
+            bf.ClrBit(i);
     }
-    else
-        (commands_V_TI[command])(bf, number);
     return istr;
 }
 

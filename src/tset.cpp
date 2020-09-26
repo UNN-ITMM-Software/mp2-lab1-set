@@ -112,97 +112,18 @@ TSet TSet::operator~(void) // дополнение
 
 // перегрузка ввода/вывода
 
-void InsElem(TSet& s, const int Elem)
-{
-    s.InsElem(Elem);
-}
-
-void DelElem(TSet& s, const int Elem)
-{
-    s.DelElem(Elem);
-}
-
-TSet create(const int n)
-{
-    TSet tempSet(n);
-    return tempSet;
-}
-
-TSet up(TSet& s, const int n)
-{
-    TSet tempSet(s.GetMaxPower() + n);
-    tempSet = tempSet + s;
-    return tempSet;
-}
-
-TSet low(TSet& s, const int n)
-{
-    TSet tempSet(s.GetMaxPower() - n);
-    for (int i = 0; i < tempSet.GetMaxPower(); i++)
-        if (s.IsMember(i))
-            tempSet.InsElem(i);
-    return tempSet;
-}
-
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    map <string, void (*)(TSet&, int)> commands_V_TI =
-    {
-        {"ADD", InsElem}, {"INS", InsElem}, {"INSERT", InsElem},
-        {"DEL", DelElem}, {"RMV", DelElem}, {"DELETE", DelElem}, {"REMOVE", DelElem}
-    };
-    map <string, TSet(*)(int)> commands_T_I =
-    {
-        {"NEW", create}, {"CRT", create}, {"CREATE", create}
-    };
-    map <string, TSet(*)(TSet&, int)> commands_T_TI =
-    {
-        {"UP", up},
-        {"LOW", low}
-    };
-    map <string, int> throws =
-    {
-        {"EXIT", -1}, {"CLOSE", -1}
-    };
-    string command;
-    istr >> command;
-    transform(command.begin(), command.end(), command.begin(), toupper);
-    if (throws.count(command) != 0)
-    {
-        throw throws[command];
-    }
-    if (command == "FILL")
-    {
-        char symbol;
-        int number;
-        istr >> symbol;
-        s = (commands_T_I["NEW"])(s.MaxPower);
-        while (symbol != '}')
-        {
-            istr >> number;
-            (commands_V_TI["ADD"])(s, number);
-            istr >> symbol;
-        }
-        return istr;
-    }
+    char symbol;
     int number;
-    istr >> number;
-    if (commands_V_TI.count(command) == 0)
+    istr >> symbol;
+    s = TSet(s.MaxPower);
+    while (symbol != '}')
     {
-        if (commands_T_I.count(command) == 0)
-        {
-            if (commands_T_TI.count(command) == 0)
-            {
-                throw "Invalid the command";
-            }
-            else
-                s = (commands_T_TI[command])(s, number);
-        }
-        else
-            s = (commands_T_I[command])(number);
+        istr >> number;
+        s.InsElem(number);
+        istr >> symbol;
     }
-    else
-        (commands_V_TI[command])(s, number);
     return istr;
 }
 

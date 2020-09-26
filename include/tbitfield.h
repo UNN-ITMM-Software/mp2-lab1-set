@@ -9,8 +9,6 @@
 #define __BITFIELD_H__
 
 #include <iostream>
-#include <map>
-#include <algorithm>
 
 using namespace std;
 
