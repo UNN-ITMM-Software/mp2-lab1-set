@@ -10,7 +10,7 @@
 
 #include "tbitfield.h"
 
-class TSet
+/*class TSet
 {
 private:
   int MaxPower;       // максимальная мощность множества
@@ -39,5 +39,5 @@ public:
 
   friend istream &operator>>(istream &istr, TSet &bf);
   friend ostream &operator<<(ostream &ostr, const TSet &bf);
-};
+};*/
 #endif
