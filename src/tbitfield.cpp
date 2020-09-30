@@ -9,13 +9,7 @@
 
 TBitField::TBitField(int len)
 {
-	if (len > 0)
-	{
-		MemLen = len;
-		BitLen = MemLen * 32;
-		pMem = new int[MemLen];
-
-	}
+	
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
