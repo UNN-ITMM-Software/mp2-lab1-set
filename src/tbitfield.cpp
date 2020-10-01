@@ -51,8 +51,8 @@ int TBitField::GetMemLen()const
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
 	int index = (n%(sizeof(TELEM)*8));
-	TELEM mask = 1;
-	mask=mask << index;
+	TELEM mask = 0;
+	mask=mask +pow(2, index);
 	return mask;
 }
 
@@ -105,18 +105,7 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 	}
 	return *this;
 }
-TBitField& TBitField::operator =(TBitField&& bf)
-{
-	if (this == &bf) {
-		return (*this);
-	}
-	BitLen = bf.BitLen;
-	MemLen = bf.MemLen;
-	delete[] pMem;
-	pMem = bf.pMem;
-	bf.pMem = nullptr;
-	return(*this);
-}
+
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
@@ -233,7 +222,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 			s.SetBit(i);
 		}
 	}
-	bf = move(s);
+	bf = s;
 	return istr;
 }
 

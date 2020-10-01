@@ -13,8 +13,7 @@
 #include <bitset>
 
 using namespace std;
-
-using TELEM = unsigned int;
+typedef unsigned int TELEM;
 
 class TBitField
 {
@@ -43,7 +42,7 @@ public:
   int operator==(const TBitField &bf) const; // сравнение                 (#О5)
   int operator!=(const TBitField &bf) const; // сравнение
   TBitField& operator=(const TBitField &bf); // присваивание              (#П3)
-  TBitField& operator =(TBitField &&bf);
+  
   TBitField  operator|(const TBitField &bf); // операция "или"            (#О6)
   TBitField  operator&(const TBitField &bf); // операция "и"              (#Л2)
   TBitField  operator~(void);                // отрицание                  (#С)

@@ -107,18 +107,32 @@ TSet TSet::operator~(void) // дополнение
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
 	int n;
+	int p;
 	istr >> n;
-	TSet q(n);
-	istr >> q.BitField;
-	s.BitField = move(q.BitField);
-	s.MaxPower = q.MaxPower;
+	TSet a(n+1);
+	char i;
+	istr >> i;
+	for (int i = 0; i < n; i++)
+	{
+		istr >> p;
+		a.InsElem(p);
+	}
+	
+	s.BitField = a.BitField;
+	s.MaxPower = a.MaxPower;
 	return istr;
-
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
 	ostr << s.MaxPower << endl;
-	ostr << s.BitField;
+	cout << "{";
+	for (int i = 0; i < s.BitField.GetLength(); i++)
+	{
+		if (s.BitField.GetBit(i))
+			cout << i << ", ";
+		
+	}
+	cout << "}" <<endl;
 	return ostr;
 }

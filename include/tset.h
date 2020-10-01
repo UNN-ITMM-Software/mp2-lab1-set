@@ -37,7 +37,7 @@ public:
   TSet operator* (const TSet &s);  // пересечение
   TSet operator~ (void);           // дополнение
 
-  friend istream &operator>>(istream &istr, TSet &bf);
-  friend ostream &operator<<(ostream &ostr, const TSet &bf);
+  friend ostream& operator << (ostream& ostr, const TSet& in);
+  friend istream& operator >> (istream& istr, TSet& out);
 };
 #endif

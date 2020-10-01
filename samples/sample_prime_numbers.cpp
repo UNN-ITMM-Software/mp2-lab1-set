@@ -7,7 +7,7 @@
 
 #include <iomanip>
 
-// #define USE_SET // Использовать класс TSet,
+ #define USE_SET // Использовать класс TSet,
                 // закоментировать, чтобы использовать битовое поле
 
 #ifndef USE_SET // Использовать класс TBitField
@@ -65,7 +65,7 @@ int main()
   cin  >> n;
   TSet s(n + 1);
   // заполнение множества
-  for (m = 2; m <= n; m++)
+  for (m = 1; m <= n; m++)
     s.InsElem(m);
   // проверка до sqrt(n) и удаление кратных
   for (m = 2; m * m <= n; m++)
