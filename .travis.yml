@@ -7,8 +7,8 @@ before_script:
   - cd ../build
 script:
   - cmake ../mp2-lab1-set
-  - make -j
+  - make -j 
   - cd ./bin/
-  - ./test_set --gtest_list_tests
+  - ./test_set
 notifications:
   email: false
