@@ -57,17 +57,16 @@ TSet TSet::operator*(const TSet& set) const
 	TSet temp(tmpB);
 	return temp;
 }
-/*
+
 TSet TSet::operator+(const int n)
 {
-	//return TSet();
+	BitField.SetBit(n);
 }
 
 TSet TSet::operator-(const int n)
 {
-	//return TSet();
-}*/
-
+	BitField.ClrBit(n);
+}
 TSet TSet::operator~()
 {
 	TBitField tmpB = ~BitField;

@@ -21,8 +21,8 @@ public:
 	TSet& operator=(const TSet& set);//Присваивание
 	TSet operator+(const TSet& set)const;//Объединение
 	TSet operator*(const TSet& set)const;//Пересечение 
-//	TSet operator+(const int n);//Включение эл-та в мн-ва
-//	TSet operator-(const int n);//Исключение эл-та из мн-ва
+    TSet operator+(const int n);//Включение эл-та в мн-ва
+	TSet operator-(const int n);//Исключение эл-та из мн-ва
 	TSet operator~();//инверсия
 	friend istream& operator >>(istream, TSet& bf);
 	friend ostream& operator <<(ostream, TSet& bf);
