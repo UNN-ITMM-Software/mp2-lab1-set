@@ -97,6 +97,8 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 	{
 		BitLen = bf.BitLen;
 		MemLen = bf.MemLen;
+		delete[] pMem;
+		pMem = nullptr;
 		pMem = new TELEM[MemLen];
 		for (int i = 0; i < MemLen; i++)
 			pMem[i] = bf.pMem[i];
