@@ -13,7 +13,7 @@ TBitField::TBitField(int len)
 {
 	if (len < 1) throw  "Wrong length";
 	BitLen = len;
-	MemLen = ceil((double)(len - 1)/(sizeof(TELEM)*8));
+	MemLen = ceil((double)(len)/(sizeof(TELEM)*8));
 	//MemLen = (BitLen - 1) / (sizeof(TELEM) * 8) + 1;
 	pMem = new TELEM[MemLen];
 	for (int i = 0; i < MemLen; i++)
@@ -24,9 +24,10 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 {
 	BitLen = bf.BitLen;
 	MemLen = bf.MemLen;
+	delete[] pMem;
 	pMem = 0;
 	pMem = new TELEM[MemLen];
-	if (pMem = 0) throw "Memmory Error";
+	if (pMem == 0) throw "Memmory Error";
 	for (int i = 0; i < MemLen; i++)
 		pMem[i] = bf.pMem[i];
 }
