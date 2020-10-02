@@ -1,15 +1,15 @@
 #include "tset.h"
 
-TSet::TSet(int maxPower):MaxPower(maxPower),BitField(maxPower)
+TSet::TSet(int maxPower) :MaxPower(maxPower), BitField(maxPower)
 {
 }
 
-TSet::TSet(const TSet& set):MaxPower(set.MaxPower),BitField(set.BitField)
+TSet::TSet(const TSet& set) : MaxPower(set.MaxPower), BitField(set.BitField)
 {
 }
 
-TSet::TSet(TBitField& bf):MaxPower(bf.GetLenght()),BitField(bf)
-{ 
+TSet::TSet(TBitField& bf) : MaxPower(bf.GetLenght()), BitField(bf)
+{
 }
 
 int TSet::GetMaxPower() const
@@ -60,12 +60,18 @@ TSet TSet::operator*(const TSet& set) const
 
 TSet TSet::operator+(const int n)
 {
-	BitField.SetBit(n);
+	TBitField bb = TBitField(this->BitField);
+	TSet BB = TSet(bb);
+	BB.InsElem(n);
+	return BB;
 }
 
 TSet TSet::operator-(const int n)
 {
-	BitField.ClrBit(n);
+	TBitField bb = TBitField(this->BitField);
+	TSet BB = TSet(bb);
+	BB.DelElem(n);
+	return BB;
 }
 TSet TSet::operator~()
 {
@@ -83,7 +89,7 @@ istream& operator>>(istream& istr, TSet& bf)
 	} while (ch != '{');
 	do
 	{
-		istr >> temp; 
+		istr >> temp;
 		bf.InsElem(temp);
 		do
 		{
@@ -93,13 +99,13 @@ istream& operator>>(istream& istr, TSet& bf)
 	return istr;
 }
 
-ostream& operator<<(ostream&ostr, TSet& bf)
+ostream& operator<<(ostream& ostr, TSet& bf)
 {
 	int i, n;
 	char ch = ' ';
 	ostr << '{';
 	n = bf.GetMaxPower();
-	for (i =0; i < n; i++)
+	for (i = 0; i < n; i++)
 	{
 		ostr << ch << ' ' << i;
 		ch = ',';

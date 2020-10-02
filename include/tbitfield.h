@@ -25,10 +25,10 @@ public:
 	//битовые операции
 	bool operator ==(const TBitField& bf)const;//сравнение
 	TBitField& operator=(const TBitField& bf);//присваивание
-	TBitField operator | (const TBitField & bf)const;//операция или
+	TBitField operator | (const TBitField& bf)const;//операция или
 	TBitField operator &(const TBitField& bf)const;//операция и
 	TBitField operator ~();//отрицание 
-	friend istream&operator>> ( istream& istr, TBitField& bf);
-	friend ostream&operator<<(ostream& ostr, TBitField& bf);
+	friend istream& operator>> (istream& istr, TBitField& bf);
+	friend ostream& operator<<(ostream& ostr, TBitField& bf);
 };
 #endif __BITFIELD_H__

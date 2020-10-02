@@ -33,7 +33,7 @@ TBitField::TBitField(const TBitField& bf)
 	BitLen = bf.BitLen;
 	MemLen = bf.MemLen;
 	pMem = new TELEM[MemLen];
-	for ( int i = 0;i < MemLen;i++)
+	for (int i = 0; i < MemLen; i++)
 	{
 		pMem[i] = bf.pMem[i];
 	}
@@ -46,14 +46,14 @@ TBitField::~TBitField()
 }
 void TBitField::SetBit(const int n)
 {
-	if ((n > -1)&&(n < BitLen))
+	if ((n > -1) && (n < BitLen))
 	{
 		pMem[GetMemIndex(n)] |= GetMemMask(n);
 	}
 }
 void TBitField::ClrBit(const int n)
 {
-	if ((n > -1) && (n< BitLen))
+	if ((n > -1) && (n < BitLen))
 	{
 		pMem[GetMemIndex(n)] |= ~GetMemMask(n);
 	}
@@ -185,8 +185,8 @@ std::istream& operator>>(istream& istr, TBitField& bf)
 		istr >> ch;
 	} while (ch != ' ');
 	*/
-	int Source=1;
-	while (Source!=bf.GetLenght())
+	int Source = 1;
+	while (Source != bf.GetLenght())
 	{
 		istr >> ch;
 		if (ch == '0')

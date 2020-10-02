@@ -2,7 +2,7 @@
 #ifndef __SET_H__
 #define __SET_H__
 #include "tbitfield.h"
-class TSet 
+class TSet
 {
 private:
 	int MaxPower;//максимальный мощность множества 
@@ -21,10 +21,10 @@ public:
 	TSet& operator=(const TSet& set);//Присваивание
 	TSet operator+(const TSet& set)const;//Объединение
 	TSet operator*(const TSet& set)const;//Пересечение 
-    TSet operator+(const int n);//Включение эл-та в мн-ва
+	TSet operator+(const int n);//Включение эл-та в мн-ва
 	TSet operator-(const int n);//Исключение эл-та из мн-ва
 	TSet operator~();//инверсия
-	friend istream& operator >>(istream, TSet& bf);
-	friend ostream& operator <<(ostream, TSet& bf);
+	friend istream& operator >>(istream& itsr, TSet& bf);
+	friend ostream& operator <<(ostream& ostr, TSet& bf);
 };
 #endif __SET_H__
