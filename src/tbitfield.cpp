@@ -35,8 +35,6 @@ TBitField::~TBitField()
 {
 	delete[] pMem;
 	pMem = 0;
-	MemLen = 0;
-	BitLen = 0;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
