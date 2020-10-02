@@ -49,6 +49,7 @@ int main()
     }
   cout << endl;
   cout << "В первых " << n << " числах " << count << " простых" << endl;
+  system("pause");
 }
 #else
 
