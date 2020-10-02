@@ -6,12 +6,14 @@
 // Битовое поле
 
 #include "tbitfield.h"
+#include "math.h"
+
 
 TBitField::TBitField(int len)
 {
-	if (len < 1) throw exception( "Wrong length");
+	if (len < 1) throw  "Wrong length";
 	BitLen = len;
-	MemLen = ceil((len - 1)/(sizeof(TELEM)*8));
+	MemLen = ceil((double)(len - 1)/(sizeof(TELEM)*8));
 	pMem = new TELEM[MemLen];
 	for (int i = 0; i < MemLen; i++)
 		pMem[i] = 0u;
@@ -23,7 +25,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 	MemLen = bf.MemLen;
 	pMem = 0;
 	pMem = new TELEM[MemLen];
-	if (pMem = 0) throw exception("Memmory Error");
+	if (pMem = 0) throw "Memmory Error";
 	for (int i = 0; i < MemLen; i++)
 		pMem[i] = bf.pMem[i];
 }
@@ -38,13 +40,13 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-	if (n < 0 || n > BitLen) throw exception("Wrong index");
+	if (n < 0 || n > BitLen) throw "Wrong index";
 	return (ceil((n - 1) / (sizeof(TELEM) * 8)));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-	if (n < 0 || n > BitLen) throw exception("Wrong index");
+	if (n < 0 || n > BitLen) throw "Wrong index";
 	int number = n % sizeof(TELEM) * 8;
 	TELEM mask = 1 << number;
 	return mask;
@@ -59,7 +61,7 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-	if (n < 0 || n > BitLen) throw exception("Wrong index");
+	if (n < 0 || n > BitLen) throw "Wrong index";
 	int number = GetMemIndex(n);
 	TELEM mask = GetMemMask(n);
 	pMem[number] = pMem[number] | mask;
@@ -67,7 +69,7 @@ void TBitField::SetBit(const int n) // установить бит
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
-	if (n < 0 || n > BitLen) throw exception("Wrong index");
+	if (n < 0 || n > BitLen) throw "Wrong index";
 	int number = GetMemIndex(n);
 	TELEM mask = GetMemMask(n);
 	pMem[number] = pMem[number] & (~mask);
@@ -75,7 +77,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
-	if (n < 0 || n > BitLen) throw exception("Wrong index");
+	if (n < 0 || n > BitLen) throw "Wrong index";
 	TELEM res;
 	int mask = GetMemMask(n);
 	int number = GetMemIndex(n);
