@@ -9,10 +9,12 @@
 #define __BITFIELD_H__
 
 #include <iostream>
+#include <math.h>
+#include <bitset>
 
 using namespace std;
 
-typedef unsigned int TELEM;
+using TELEM = unsigned int;
 
 class TBitField
 {
@@ -24,12 +26,14 @@ private:
   // методы реализации
   int   GetMemIndex(const int n) const; // индекс в pМем для бита n       (#О2)
   TELEM GetMemMask (const int n) const; // битовая маска для бита n       (#О3)
+  
 public:
   TBitField(int len);                //                                   (#О1)
   TBitField(const TBitField &bf);    //                                   (#П1)
   ~TBitField();                      //                                    (#С)
 
   // доступ к битам
+  int GetMemLen() const;
   int GetLength(void) const;      // получить длину (к-во битов)           (#О)
   void SetBit(const int n);       // установить бит                       (#О4)
   void ClrBit(const int n);       // очистить бит                         (#П2)
@@ -39,6 +43,7 @@ public:
   int operator==(const TBitField &bf) const; // сравнение                 (#О5)
   int operator!=(const TBitField &bf) const; // сравнение
   TBitField& operator=(const TBitField &bf); // присваивание              (#П3)
+  TBitField& operator =(TBitField &&bf);
   TBitField  operator|(const TBitField &bf); // операция "или"            (#О6)
   TBitField  operator&(const TBitField &bf); // операция "и"              (#Л2)
   TBitField  operator~(void);                // отрицание                  (#С)

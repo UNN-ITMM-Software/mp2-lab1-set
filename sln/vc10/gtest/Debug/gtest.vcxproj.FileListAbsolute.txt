@@ -1,0 +1,2 @@
+C:\Users\TEMYCH\source\repos\mp2-lab1-set-master\sln\vc10\Debug\gtest.pdb
+C:\Users\TEMYCH\source\repos\mp2-lab1-set-master\sln\vc10\gtest\Debug\gtest.pdb
