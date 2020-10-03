@@ -1,4 +1,5 @@
 # Методы программирования 2: Множества на основе битовых полей
+## Новая ветка mb_bitset
 
 [![Build Status](https://travis-ci.org/UNN-ITMM-Software/mp2-lab1-set.svg)][travis]
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)][gitter]
