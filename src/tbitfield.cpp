@@ -8,6 +8,7 @@
 #include "tbitfield.h"
 TBitField::TBitField(int len)
 {
+// +++++++++++++++++++++++++++
     if (len < 0)
         throw -1;
     BitLen = len;
