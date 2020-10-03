@@ -29,6 +29,8 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
   pMem = new TELEM[MemLen];
   if (pMem != NULL)
     for (int i = 0; i < MemLen; i++) pMem[i] = bf.pMem[i];
+  else
+	throw -1;
 }
 
 TBitField::~TBitField()
@@ -152,8 +154,9 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 
 TBitField TBitField::operator~(void) // отрицание
 {
-  TBitField temp(BitLen);
-  for (int i = 0; i < BitLen; i++)
+  int TempLen = BitLen;
+  TBitField temp(TempLen);
+  for (int i = 0; i < TempLen; i++)
     if (this->GetBit(i) == 0) temp.SetBit(i);
     else temp.ClrBit(i);
 
