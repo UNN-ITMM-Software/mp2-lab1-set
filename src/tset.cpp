@@ -107,18 +107,38 @@ TSet TSet::operator~(void) // дополнение
 
 istream& operator>>(istream& istr, TSet& s) // ввод
 {
-    int temp;
-    istr >> temp;
-    TSet q(temp);
-    istr >> q.BitField;
-    s.BitField = move(q.BitField);
-    s.MaxPower = q.MaxPower;
+    int temp; char ch;
+    do
+    {
+        istr >> ch;
+    } while (ch != '{');
+
+    do {
+        istr >> temp;
+        s.InsElem(temp);
+        do
+        {
+            istr >> ch;
+        } while ((ch != ',') && (ch != '}'));
+
+    } while (ch != '}');
+
     return istr;
 }
 
 ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
-    ostr << s.MaxPower << endl;
-    ostr << s.BitField;
+    int i, n; char ch = '{';
+    n = s.GetMaxPower();
+
+    for (i = 0; i < n; i++)
+    {
+        if (s.IsMember(i))
+        {
+            ostr << ch << i;
+            ch = ',';
+        }
+    }
+    ostr << "}";
     return ostr;
 }

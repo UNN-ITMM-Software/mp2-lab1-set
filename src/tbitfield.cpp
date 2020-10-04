@@ -232,27 +232,40 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream& operator>>(istream& istr, TBitField& bf) // ввод
 {
-    int temp;
-    istr >> temp;
-    TBitField s(temp);
-    for (int i = 0; i < temp; i++)
+    int i = 0; char ch;
+    do
     {
-        istr >> temp;
-        if (temp == 1)
+        istr >> ch;
+    } while (ch != ' ');
+    while (1)
+    {
+        istr >> ch;
+        if (ch == '0')
         {
-            s.SetBit(i);
+            bf.ClrBit(i++);
         }
+        else if (ch == '1')
+        {
+            bf.SetBit(i++);
+        }
+        else break;
     }
-    bf = move(s);
     return istr;
 }
 
 ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
 {
-    ostr << bf.GetLength() << endl;
-    for (int i = 0; i < bf.MemLen; i++)
+    int len = bf.GetLength();
+    for (int i = 0; i < len; i++)
     {
-        ostr << sizeof(TELEM) * 8;
+        if (bf.GetBit(i))
+        {
+            ostr << '1';
+        }
+        else
+        {
+            ostr << '0';
+        }
     }
     return ostr;
 }
