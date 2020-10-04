@@ -7,26 +7,22 @@
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(mp)
-{
+TSet::TSet(int mp) : BitField(mp) {
     if (mp <= 0) throw out_of_range("Length should be positive");
     this->MaxPower = mp;
 }
 
 // конструктор копирования
-TSet::TSet(const TSet &s) : BitField(s.BitField)
-{
+TSet::TSet(const TSet &s) : BitField(s.BitField) {
     this->MaxPower = s.MaxPower;
 }
 
 // конструктор преобразования типа
-TSet::TSet(const TBitField &bf) : BitField(bf)
-{
+TSet::TSet(const TBitField &bf) : BitField(bf) {
     this->MaxPower = bf.GetLength();
 }
 
-TSet::operator TBitField()
-{
+TSet::operator TBitField() {
     TBitField tmp(this->BitField);
     return tmp;
 }
@@ -53,7 +49,7 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 
 // теоретико-множественные операции
 
-TSet& TSet::operator=(const TSet &s) // присваивание
+TSet &TSet::operator=(const TSet &s) // присваивание
 {
     this->MaxPower = s.MaxPower;
     this->BitField = s.BitField;
@@ -105,25 +101,28 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    int len;
+    // { 1 3 4 5} - формат
     int elem;
-    istr>>len;
-    s = TSet(len);
-    for(int i=0; i<len; ++i){
+    char ch;
+    do { istr >> ch; } while (ch != '{');
+    while(true){
         istr>>elem;
         s.InsElem(elem);
+        do{ istr >> ch;} while (ch != ' ' && ch != '}');
+        if(ch == '}') break;
     }
     return istr;
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // вывод
+ostream &operator<<(ostream &ostr, const TSet &s) // вывод
 {
-    ostr<<"{ ";
-    for(int i=0; i<s.MaxPower; ++i){
-        if(s.BitField.GetBit(i)){
-            ostr<<i<<" ";
+    // { 1 3 4 5} - формат
+    ostr << "{ ";
+    for (int i = 0; i < s.MaxPower; ++i) {
+        if (s.BitField.GetBit(i)) {
+            ostr << i << " ";
         }
     }
-    ostr<<" }";
+    ostr << " }\n";
     return ostr;
 }
