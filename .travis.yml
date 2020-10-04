@@ -7,7 +7,7 @@ before_script:
   - cd ../build
 script:
   - cmake ../mp2-lab1-set
-  - make -std=c++0x -j
+  - make re-j
   - cd ./bin/
   - ./test_set
 notifications:

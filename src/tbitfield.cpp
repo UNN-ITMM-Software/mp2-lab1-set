@@ -14,7 +14,7 @@ TBitField::TBitField(int len) {
     this->MemLen = (len - 1) / (sizeof(TELEM) * 8) + 1;
     this->pMem = new TELEM[this->MemLen];
 
-    if (this->pMem != nullptr) {
+    if (this->pMem != NULL) {
         for (int i = 0; i < this->MemLen; ++i) {
             this->pMem[i] = 0;
         }
@@ -32,7 +32,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 }
 
 TBitField::~TBitField() {
-    if (this->pMem != nullptr)
+    if (this->pMem != NULL)
         delete this->pMem;
 }
 
@@ -79,7 +79,7 @@ TBitField &TBitField::operator=(const TBitField &bf) // присваивание
 {
     if (&bf != this) {
         if (this->MemLen != bf.MemLen) {
-            if (this->pMem != nullptr) {
+            if (this->pMem != NULL) {
                 delete this->pMem;
             }
             this->pMem = new TELEM[bf.MemLen];
