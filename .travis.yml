@@ -7,7 +7,7 @@ before_script:
   - cd ../build
 script:
   - cmake ../mp2-lab1-set
-  - make re-j
+  - make -j
   - cd ./bin/
   - ./test_set
 notifications:
