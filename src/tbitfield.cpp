@@ -9,7 +9,7 @@
 
 TBitField::TBitField(int len)
 {
-    if (len <= 0)
+    if (len < 0)
     {
         throw("Out_Of_Range");
     }
