@@ -6,8 +6,8 @@ before_script:
   - mkdir ../build
   - cd ../build
 script:
-  - cmake -std=c++0x ../mp2-lab1-set
-  - make -j
+  - cmake ../mp2-lab1-set
+  - make -std=c++0x -j
   - cd ./bin/
   - ./test_set
 notifications:
