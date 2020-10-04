@@ -6,7 +6,7 @@ before_script:
   - mkdir ../build
   - cd ../build
 script:
-  - cmake ../mp2-lab1-set
+  - cmake -std=c++0x ../mp2-lab1-set
   - make -j
   - cd ./bin/
   - ./test_set
