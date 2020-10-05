@@ -25,6 +25,7 @@ TSet::operator TBitField()
 int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
 {
     return MaxPower;
+
 }
 
 int TSet::IsMember(const int Elem) const // элемент множества?
