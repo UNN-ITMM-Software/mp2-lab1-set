@@ -11,7 +11,8 @@ TBitField::TBitField(int len)
 {
 	if (len >= 0) {
 		BitLen = len;
-		MemLen = log(sizeof(TELEM) * 8 * len) / log(2);
+		int x = log(sizeof(TELEM) * 8) / log(2);
+		MemLen = (sizeof(TELEM) * 8 + len - 1) >> x;
 		pMem = new TELEM[MemLen];
 		for (int i = 0; i < MemLen; i++)
 			pMem[i] = 0;
@@ -33,6 +34,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 TBitField::~TBitField()
 {
 	delete[] pMem;
+	pMem = NULL;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
@@ -40,9 +42,9 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 	if (n < 0) throw std::logic_error("Negative length");
 	if (n >= BitLen) throw std::logic_error("Too large ind");
 
-	int size = sizeof(TELEM) * 8;
-	int res = (n + size - 1) / size;
-	return res;
+	//int size = sizeof(TELEM) * 8;
+	//int res = n / size;
+	return n >> sizeof(TELEM);
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
@@ -63,8 +65,7 @@ void TBitField::SetBit(const int n) // устан
 	if (n < 0) throw std::logic_error("Negative length");
 	if (n >= BitLen) throw std::logic_error("Too large ind");
 	int MemI = GetMemIndex(n);
-	int i = n / MemI;
-	pMem[MemI] |= 1 << i;
+	pMem[MemI] |= GetMemMask(n);
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
@@ -88,17 +89,20 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
+	if (&bf == this) {
+		return *this;
+	}
+
 	BitLen = bf.BitLen;
 	if (MemLen != bf.MemLen)
 	{
 		MemLen = bf.MemLen;
-		if (pMem != nullptr) delete pMem;
+		delete []pMem;
 		pMem = new TELEM[MemLen];
 	}
-	if (pMem != nullptr)
-	{
-		for (int i = 0; i < MemLen; i++) pMem[i] = bf.pMem[i];
-	}
+
+	for (int i = 0; i < MemLen; i++) pMem[i] = bf.pMem[i];
+
 	return *this;
 }
 
@@ -177,9 +181,10 @@ TBitField TBitField::operator~(void) // отрицание
 {
 	int len = BitLen;
 	TBitField res(len);
-	for (int i = 0; i < MemLen; i++)
+	for (int i = 0; i < len; i++)
 	{
-		res.pMem[i] = ~pMem[i];
+		if (GetBit(i) == 0)
+			res.SetBit(i);
 	}
 	return res;
 }
