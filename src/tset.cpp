@@ -131,3 +131,4 @@ ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 	ostr << '}';
 	return ostr;
 }
+// New Tset
