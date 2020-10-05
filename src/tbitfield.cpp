@@ -9,78 +9,176 @@
 
 TBitField::TBitField(int len)
 {
+	if (len < 0)
+		throw ("NEGATIVE");
+	BitLen = len;
+	if (len % (sizeof(TELEM) * 8) == 0)
+		MemLen = len / (sizeof(TELEM) * 8);
+	else
+		MemLen = (len / (sizeof(TELEM) * 8)) + 1;
+	pMem = new TELEM[MemLen];
+	for (int i = 0; i < MemLen; i++)
+		pMem[i] = 0;
 }
 
-TBitField::TBitField(const TBitField &bf) // конструктор копирования
+TBitField::TBitField(const TBitField& bf) // конструктор копирования
 {
+	BitLen = bf.BitLen;
+	MemLen = bf.MemLen;
+	pMem = new TELEM[MemLen];
+	for (int i = 0; i < MemLen; i++)
+		pMem[i] = bf.pMem[i];
 }
 
 TBitField::~TBitField()
 {
+	delete[] pMem;
 }
 
-int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
+void TBitField::CheckIndex(const int value) const
 {
+	if (value > BitLen || value <= -1)
+		throw ("INDEX_OUT_OF_RANGE");
 }
 
-TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
+int TBitField::GetMemIndex(const int n) const 
 {
+	CheckIndex(n);
+	return (n / (sizeof(TELEM) * 8));
 }
 
-// доступ к битам битового поля
-
-int TBitField::GetLength(void) const // получить длину (к-во битов)
+TELEM TBitField::GetMemMask(const int n) const 
 {
-  return 0;
+	CheckIndex(n);
+	return 1 << (n % (sizeof(TELEM) * 8));
 }
 
-void TBitField::SetBit(const int n) // установить бит
+
+
+int TBitField::GetLength(void) const 
 {
+	return BitLen;
 }
 
-void TBitField::ClrBit(const int n) // очистить бит
+void TBitField::SetBit(const int n) 
 {
+	CheckIndex(n);
+	pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
 
-int TBitField::GetBit(const int n) const // получить значение бита
+void TBitField::ClrBit(const int n) 
 {
-  return 0;
+	CheckIndex(n);
+	pMem[GetMemIndex(n)] &= ~GetMemMask(n);
 }
 
-// битовые операции
-
-TBitField& TBitField::operator=(const TBitField &bf) // присваивание
+int TBitField::GetBit(const int n) const 
 {
+	CheckIndex(n);
+	return (pMem[GetMemIndex(n)] & GetMemMask(n));
 }
 
-int TBitField::operator==(const TBitField &bf) const // сравнение
+
+
+TBitField& TBitField::operator=(const TBitField& bf)
 {
-  return 0;
+	if (pMem == NULL)
+		throw "EROR";
+	if (this != &bf)
+	{
+		BitLen = bf.BitLen;
+		MemLen = bf.MemLen;
+		delete[] pMem;
+		pMem = new TELEM[MemLen];
+		for (int i = 0; i < MemLen; i++)
+			pMem[i] = bf.pMem[i];
+	}
+	return *this;
 }
 
-int TBitField::operator!=(const TBitField &bf) const // сравнение
+int TBitField::operator==(const TBitField& bf) const 
 {
-  return 0;
+
+	if (BitLen == bf.BitLen)
+	{
+		for (int i = 0; i < MemLen; i++)
+			if (pMem[i] != bf.pMem[i])
+				return 0;
+		return 1;
+	}
+	return 0;
 }
 
-TBitField TBitField::operator|(const TBitField &bf) // операция "или"
+int TBitField::operator!=(const TBitField& bf) const 
 {
+	return (*this == bf) ^ 1;
 }
 
-TBitField TBitField::operator&(const TBitField &bf) // операция "и"
+TBitField TBitField::operator|(const TBitField& bf) 
 {
+	int btlen = BitLen;
+	if (bf.BitLen > btlen)
+		btlen = bf.BitLen;
+	TBitField tmp(btlen);
+	for (int i = 0; i < bf.MemLen; i++)
+		tmp.pMem[i] = bf.pMem[i] | pMem[i];
+	return tmp;
 }
 
-TBitField TBitField::operator~(void) // отрицание
+TBitField TBitField::operator&(const TBitField& bf) 
 {
+	int btlen = BitLen;
+	if (bf.BitLen > btlen)
+		btlen = bf.BitLen;
+	TBitField tmp(btlen);
+	for (int i = 0; i < bf.MemLen; i++)
+		tmp.pMem[i] = bf.pMem[i] & pMem[i];
+	return tmp;
 }
 
-// ввод/вывод
-
-istream &operator>>(istream &istr, TBitField &bf) // ввод
+TBitField TBitField::operator~(void) 
 {
+	TBitField tmp(*this);
+	for (int i = 0; i < BitLen; i++)
+	{
+		if (GetBit(i))
+			tmp.ClrBit(i);
+		else
+			tmp.SetBit(i);
+	}
+	return tmp;
 }
 
-ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
+
+
+istream& operator>>(istream& istr, TBitField& bf) 
 {
+	char sign;
+	int i = 1;
+	istr >> sign;
+	while (((sign == '0') || (sign == '1')) && (i < bf.BitLen - 1))
+	{
+		if (sign == '0')
+			bf.ClrBit(i);
+		else
+			bf.SetBit(i);
+		istr >> sign;
+		i++;
+	}
+	return istr;
+}
+
+ostream& operator<<(ostream& ostr, const TBitField& bf) 
+{
+	for (int i = 0; i < bf.BitLen; i++)
+	{
+		if (bf.GetBit(i))
+			ostr << 1;
+		else
+			ostr << 0;
+		if ((i + 1) % (8 * sizeof(TELEM)) == 0)
+			ostr << " ";
+	}
+	ostr << endl;
+	return ostr;
 }
