@@ -56,7 +56,7 @@ int main()
 
 int main()
 {
-  int n, m, k, count;
+  /*int n, m, k, count;
 
   setlocale(LC_ALL, "Russian");
   cout << "Тестирование программ поддержки множества" << endl;
@@ -65,7 +65,7 @@ int main()
   cin  >> n;
   TSet s(n + 1);
   // заполнение множества
-  for (m = 1; m <= n; m++)
+  for (m = 2; m <= n; m++)
     s.InsElem(m);
   // проверка до sqrt(n) и удаление кратных
   for (m = 2; m * m <= n; m++)
@@ -88,7 +88,18 @@ int main()
         cout << endl;
     }
   cout << endl;
-  cout << "В первых " << n << " числах " << count << " простых" << endl;
+  cout << "В первых " << n << " числах " << count << " простых" << endl;*/
+  const int size = 4;
+  TSet set(size), set1(size), expSet(size);
+  // set1 = {1, 3}
+  set.InsElem(1);
+  set.InsElem(3);
+  set1 = ~set;
+  // expSet = {0, 2}
+  expSet.InsElem(0);
+  expSet.InsElem(2);
+ 
+  cout << (set1 == expSet);
 }
 
 #endif

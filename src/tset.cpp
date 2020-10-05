@@ -12,14 +12,14 @@ TSet::TSet(int mp) : BitField(mp),MaxPower(mp)
 }
 
 // конструктор копирования
-TSet::TSet(const TSet &s):BitField(0)
+TSet::TSet(const TSet& s)
 {
 	(*this).BitField = s.BitField;
 	(*this).MaxPower = s.MaxPower;
 }
 
 // конструктор преобразования типа
-TSet::TSet(const TBitField &bf) : BitField(0)
+TSet::TSet(const TBitField &bf)
 {
 	(*this).BitField=bf;
 	(*this).MaxPower = bf.GetMemLen()*sizeof(TELEM)*8;
@@ -71,35 +71,43 @@ int TSet::operator!=(const TSet &s) const // сравнение
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-	(this->BitField) | s.BitField;
-	if ((this->MaxPower) < s.GetMaxPower()) MaxPower = s.GetMaxPower();
+	TSet a(s);
+	
+	a.BitField = ((*this).BitField | s.BitField);
+	if ((a.MaxPower) < MaxPower) a.MaxPower = MaxPower;
+	
 
-	return(*this);
+	return(a);
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-		BitField.SetBit(Elem);	
-		return(*this);
+	TSet a(*this);
+		a.BitField.SetBit(Elem);	
+		return(a);
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-	BitField.ClrBit(Elem);
+	TSet a(*this);
+
+	a.BitField.ClrBit(Elem);
 	return(*this);
 }
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-	BitField & s.BitField;
+	TSet a(s);
+	a.BitField=(*this).BitField & s.BitField;
 	if ((this->MaxPower) < s.GetMaxPower()) MaxPower = s.GetMaxPower();
-	return(*this);
+	return(a);
 }
 
 TSet TSet::operator~(void) // дополнение
 {
-	~BitField;
-	return(*this);
+	TSet a(*this);
+	a.BitField=~BitField;
+	return(a);
 }
 
 // перегрузка ввода/вывода
