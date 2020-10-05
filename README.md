@@ -4,7 +4,7 @@
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)][gitter]
 
 <!-- TODO
-  -
+  -gfkjgkdfjlkgjokfjglkdsf
 -->
 
 ## Новости
