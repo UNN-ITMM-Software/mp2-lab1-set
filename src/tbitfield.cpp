@@ -23,7 +23,7 @@ TBitField::TBitField(int len)
 	pMem = new TELEM[MemLen];
 	if (pMem == nullptr) throw "Memmory Error";
 	for (int i = 0; i < MemLen; i++)
-		pMem[i] = 0 << (sizeof(TELEM)*8);
+		pMem[i] = 0u;
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
