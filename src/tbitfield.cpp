@@ -114,16 +114,16 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-	/*if (this == &bf) return 1;
+	if (this == &bf) return 1;
 	if (BitLen != bf.BitLen) return 0;
 	for (int i = 0; i < BitLen; i++)
 		if (this->GetBit(i) != bf.GetBit(i)) return 0;
-	return 1;*/
-	if (this->BitLen != bf.BitLen) return 0;
+	return 1;
+	/*if (this->BitLen != bf.BitLen) return 0;
 	else
 		for (int i = 0; i < this->MemLen; i++)
 			if (this->pMem[i] != bf.pMem[i]) return 0;
-	return 1;
+	return 1;*/
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
