@@ -9,7 +9,8 @@
 
 TBitField::TBitField(int len)
 {
- if (len < 0) throw "error";
+ if (len < 0) 
+  throw "error";
  BitLen = len;
  MemLen = (BitLen + 31) / (32);
  pMem = new TELEM[MemLen];
@@ -30,12 +31,20 @@ TBitField::TBitField(const TBitField& bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
- delete[] pMem;
+ if (pMem != nullptr)
+ {
+  delete[] pMem;
+  pMem = nullptr;
+ }
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
- return n / (32);
+ if (n < 0 || n >= Bitlen)
+ {
+  throw "Error";
+ }
+ return (floor((double)n / (sizeof(TELEM) * 8)));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
@@ -150,6 +159,19 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream& operator>>(istream& istr, TBitField& bf) // ввод
 {
+ int len;
+ istr >> len;
+ TBitField result(len);
+ for (int i = 0; i < len; i++)
+ {
+  int bit;
+  istr >> bit;
+  if (bit == 1)
+  {
+   result.SetBit(len - i - 1);
+  }
+  bf = result;
+ }
  return istr;
 }
 

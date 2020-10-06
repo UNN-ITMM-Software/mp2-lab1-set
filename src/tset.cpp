@@ -7,18 +7,15 @@
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(1)
+TSet::TSet(int mp) : BitField(mp)
 {
- if (mp < 0) throw "error";
  MaxPower = mp;
- BitField = TBitField(MaxPower);
 }
 
 // конструктор копирования
-TSet::TSet(const TSet& s) : BitField(1)
+TSet::TSet(const TSet& s) : BitField(s.BitField)
 {
  MaxPower = s.MaxPower;
- BitField = s.BitField;
 }
 
 // конструктор преобразования типа
