@@ -14,7 +14,7 @@ TBitField::TBitField(int len)
 		throw "Oshibka";
 	}
 	BitLen = len;
-	MemLen = len/(sizeof(TELEM)*8) + 1;
+	MemLen = (len + (sizeof(TELEM)*8) - 1) / (sizeof(TELEM) * 8);
 	pMem = new TELEM[MemLen];
 	for (int i = 0; i < MemLen; i++) {
 		pMem[i] = 0;
@@ -42,8 +42,7 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-	int index = (n / (sizeof(TELEM) * 8));
-	return index;
+	return n >> 5;
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
@@ -97,6 +96,7 @@ TBitField& TBitField::operator=(const TBitField& bf) // присваивание
 		BitLen = bf.BitLen;
 		if (MemLen != bf.MemLen) {
 			MemLen = bf.MemLen;
+			delete pMem;
 			pMem = new TELEM[MemLen];
 		}
 		for (int i = 0; i < MemLen; i++) {
