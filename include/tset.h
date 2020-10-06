@@ -8,7 +8,7 @@
 #ifndef __SET_H__
 #define __SET_H__
 
-#include "bitfield.h"
+#include "tbitfield.h"
 
 class TSet
 {
