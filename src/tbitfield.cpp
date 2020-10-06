@@ -2,6 +2,7 @@
 // Битовое поле
 
 #include "tbitfield.h"
+#include <cmath>
 
 TBitField::TBitField(int len)
 {
@@ -106,7 +107,6 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 {
   if (BitLen != bf.BitLen)
   {
-
 	return false;
   }
   for (int i = 0; i < MemLen - 1; i++)
