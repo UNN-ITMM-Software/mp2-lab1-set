@@ -1,20 +1,10 @@
 // Передаю привет старой методичке по ABC :)
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(1)
-{
-	if (mp < 0)
-		throw "error";
-	MaxPower = mp;
-	BitField = TBitField(MaxPower);
-}
+TSet::TSet(int mp) : MaxPower(mp), BitField(mp) {}
 
 // конструктор копирования
-TSet::TSet(const TSet& s) : BitField(1)
-{
-	MaxPower = s.MaxPower;
-	BitField = s.BitField;
-}
+TSet::TSet(const TSet& s) : MaxPower(s.MaxPower), BitField(s.BitField) {}
 
 // конструктор преобразования типа
 TSet::TSet(const TBitField& bf) : MaxPower(bf.GetLength()), BitField(bf)
@@ -120,6 +110,18 @@ TSet TSet::operator~(void) // дополнение
 
 istream& operator>>(istream& istr, TSet& s) // ввод
 {
+	int temp;
+	char ch;
+	do {
+		istr >> ch;
+	} while (ch != '{');
+	do {
+		istr >> temp;
+		s.InsElem(temp);
+		do {
+			istr >> ch;
+		} while ((ch != ',') && (ch != '}'));
+	} while (ch != '}');
 	return istr;
 }
 
