@@ -36,13 +36,16 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
     for (int i = 0; i < MemLen; i++) 
       pMem[i] = bf.pMem[i];
   else
-	throw -1;
+	  throw -1;
 }
 
 TBitField::~TBitField()
 {
-  delete[] pMem;
-  pMem = nullptr;
+  if (pMem != nullptr)
+  {
+    delete[] pMem;
+    pMem = nullptr;
+  }
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
@@ -183,8 +186,8 @@ TBitField TBitField::operator~(void) // отрицание
   for (int i = 0; i < templen; i++)
     if (this->GetBit(i) == 0) 
       temp.SetBit(i);
-    else temp.ClrBit(i);
-
+    else 
+      temp.ClrBit(i);
   return temp;
 }
 
