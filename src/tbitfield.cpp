@@ -6,7 +6,6 @@
 // Битовое поле
 
 #include "bitfield.h"
-#include <cmath>
 
 TBitField::TBitField(int len)
 {
@@ -41,17 +40,17 @@ TBitField::TBitField(const TBitField& bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
- if (pMem != nullptr)
+ if (pMem == NULL || MemLen == NULL || Bitlen == NULL)
  {
-  delete[] pMem;
-  pMem = nullptr;
+  throuw("NULL_REFERENCE_EXEPTION");
  }
+ delete[] pMem;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
  if (n >= 0 && n < BitLen)
-  return n / (8 * sizeof(TELEM));
+  return n / (sizeof(TELEM) * 8);
  else
   throw - 1;
 }
