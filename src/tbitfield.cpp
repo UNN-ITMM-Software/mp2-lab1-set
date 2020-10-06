@@ -1,4 +1,4 @@
-// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
+/// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
 //
 // tbitfield.cpp - Copyright (c) Гергель В.П. 07.05.2001
 //   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
@@ -32,7 +32,11 @@ TBitField::TBitField(const TBitField& bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
-	delete[] pMem;
+	if (pMem != NULL)
+	{
+		delete[]pMem;
+		pMem = NULL;
+	}
 }
 
 void TBitField::CheckIndex(const int value) const
@@ -44,7 +48,7 @@ void TBitField::CheckIndex(const int value) const
 int TBitField::GetMemIndex(const int n) const 
 {
 	CheckIndex(n);
-	return (n / (sizeof(TELEM) * 8));
+		return n >> 5;
 }
 
 TELEM TBitField::GetMemMask(const int n) const 
