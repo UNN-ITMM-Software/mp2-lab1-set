@@ -60,27 +60,27 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 void TBitField::SetBit(const int n) // установить бит
 {
     if (n < 0)
-        throw invalid_argument("Can't set negative bit");
+        throw invalid_argument("Can't set negative bit.");
     if (n >= BitLen)
-        throw invalid_argument("Can't set bit larger than the maximum bit field size");
+        throw invalid_argument("Can't set bit larger than the maximum bit field size.");
     pMem[GetMemIndex(n)] |= GetMemMask(n % 32);
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
     if (n < 0)
-        throw invalid_argument("Can't clear negative bit");
+        throw invalid_argument("Can't clear negative bit.");
     if (n >= BitLen)
-        throw invalid_argument("Can't clear bit larger than the maximum bit field size");
+        throw invalid_argument("Can't clear bit larger than the maximum bit field size.");
     pMem[GetMemIndex(n)] &= ~GetMemMask(n % 32);
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
     if (n < 0)
-        throw invalid_argument("Can't get negative bit");
+        throw invalid_argument("Can't get negative bit.");
     if (n >= BitLen)
-        throw invalid_argument("Can't get bit larger than the maximum bit field size");
+        throw invalid_argument("Can't get bit larger than the maximum bit field size.");
     if ((pMem[GetMemIndex(n)] & GetMemMask(n % 32)) > 0)
         return 1;
     else
