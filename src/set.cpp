@@ -24,7 +24,7 @@ TSet::TSet(const TBitField &bf) : BitField(bf)
   MaxPower = bf.GetLength();
 }
 
-TSet::TBitField()
+TSet::operator TBitField()
 {
   TBitField temp(this->BitField);
   return temp;
