@@ -12,7 +12,7 @@ TBitField::TBitField(int len)
 {
   if (len <= 0)
     throw "Invalid len";
-  MemLen = int(ceil(len / (sizeof(TELEM) * 8.0)));
+  MemLen = (len + sizeof(TELEM) * 8 - 1) / (sizeof(TELEM) * 8);;
   pMem = new TELEM[MemLen];
   if (!pMem)
     throw "Memory error";
@@ -168,7 +168,7 @@ TBitField TBitField::operator~(void) // отрицание
 
 // ввод/вывод
 
-istream &operator>>(istream &istr, TBitField &bf) // ввод
+istream &operator>>(istream &istr, TBitField &bf) //  ввод
 {
   int len;
   istr >> len;
