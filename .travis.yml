@@ -6,7 +6,7 @@ before_script:
   - mkdir ../build
   - cd ../build
 script:
-  - "C:\Users\acer\Desktop\Cmake\cmake-3.18.3-win64-x64\cmake-3.18.3-win64-x64\bin\cmake" ../mp2-lab1-set
+  - cmake ../mp2-lab1-set
   - make -j
   - cd ./bin/
   - ./test_set 
