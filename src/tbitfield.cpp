@@ -11,7 +11,8 @@ TBitField::TBitField(int len) {
     if (len < 0) throw out_of_range("Length should be positive");
 
     this->BitLen = len;
-    this->MemLen = (len - 1) / (sizeof(TELEM) * 8) + 1;
+    // sizeof(TELEM) = 4; bits in TELEM = 32; log2(bits) = 5; to make 1-31 work properly +31;
+    this->MemLen = (len + 31) >> 5;
     this->pMem = new TELEM[this->MemLen];
 
     if (this->pMem != NULL) {
@@ -32,14 +33,17 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 }
 
 TBitField::~TBitField() {
-    if (this->pMem != NULL)
-        delete this->pMem;
+    if (this->pMem != NULL) {
+        delete[] this->pMem;
+        this->pMem = NULL;
+    }
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
     if (n < 0 || n >= this->BitLen) throw out_of_range("Bit index out of boundaries");
-    return (n / (sizeof(TELEM) * 8));
+    // sizeof(TELEM) = 4; bits in TELEM = 32; log2(bits) = 5;
+    return n >> 5;
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
@@ -80,7 +84,8 @@ TBitField &TBitField::operator=(const TBitField &bf) // присваивание
     if (&bf != this) {
         if (this->MemLen != bf.MemLen) {
             if (this->pMem != NULL) {
-                delete this->pMem;
+                delete[] this->pMem;
+                this->pMem = NULL;
             }
             this->pMem = new TELEM[bf.MemLen];
         }
@@ -178,15 +183,15 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
     int index = 0;
     char ch;
     do { istr >> ch; } while (ch != ' ');
-    while(true){
-        istr>>ch;
-        if(ch == '0'){
+    while (true) {
+        istr >> ch;
+        if (ch == '0') {
             bf.ClrBit(index);
             index++;
-        }else if (ch == '1'){
+        } else if (ch == '1') {
             bf.SetBit(index);
             index++;
-        }else{
+        } else {
             break;
         }
     }
