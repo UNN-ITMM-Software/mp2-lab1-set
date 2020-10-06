@@ -18,7 +18,6 @@ TBitField::TBitField(int len)
 	if (len < 1) throw  "Wrong length";
 	BitLen = len;
 	MemLen = ceil((double)(len)/(sizeof(TELEM)*8));
-	//MemLen = (BitLen - 1) / (sizeof(TELEM) * 8) + 1;
 	pMem = nullptr;
 	pMem = new TELEM[MemLen];
 	if (pMem == nullptr) throw "Memmory Error";
@@ -30,7 +29,6 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 {
 	BitLen = bf.BitLen;
 	MemLen = bf.MemLen;
-	delete[] pMem;
 	pMem = nullptr;
 	pMem = new TELEM[MemLen];
 	if (pMem == nullptr) throw "Memmory Error";
@@ -40,6 +38,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
+	if (pMem != nullptr)
 	delete[] pMem;
 	pMem = nullptr;
 }
@@ -47,14 +46,11 @@ TBitField::~TBitField()
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
 	if (n < 0 || n >= BitLen) throw "Wrong index";
-	return (floor((double)n / (sizeof(TELEM) * 8)));
+	return (floor((double)(n) / (sizeof(TELEM) * 8)));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-	//if (n < 0 || n >= BitLen) throw "Wrong index";
-	//int number = n % sizeof(TELEM) * 8;
-	//TELEM mask = 1 << number;
 	return 1 << (n % (sizeof(TELEM) * 8));
 }
 
@@ -67,7 +63,7 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-	//if (n < 0 || n > BitLen) throw "Wrong index";
+	if (n < 0 || n > BitLen) throw "Wrong index";
 	int number = GetMemIndex(n);
 	TELEM mask = GetMemMask(n);
 	pMem[number] = pMem[number] | mask;
@@ -84,13 +80,6 @@ void TBitField::ClrBit(const int n) // очистить бит
 int TBitField::GetBit(const int n) const // получить значение бита
 {
 	if (n < 0 || BitLen <= n) throw "Wrong index";
-	//TELEM res;
-	//int mask = GetMemMask(n);
-	//int number = GetMemIndex(n);
-	//res = pMem[number] & mask;
-	//if (res != 0)
-		//return 1;
-	//return 0;
 	return (pMem[GetMemIndex(n)] >> (n % (sizeof(TELEM) * 8))) & 1u;
 }
 
@@ -102,6 +91,7 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 	{
 		BitLen = bf.BitLen;
 		MemLen = bf.MemLen;
+		if (pMem !=nullptr)
 		delete[] pMem;
 		pMem = nullptr;
 		pMem = new TELEM[MemLen];
@@ -119,11 +109,6 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 	for (int i = 0; i < BitLen; i++)
 		if (this->GetBit(i) != bf.GetBit(i)) return 0;
 	return 1;
-	/*if (this->BitLen != bf.BitLen) return 0;
-	else
-		for (int i = 0; i < this->MemLen; i++)
-			if (this->pMem[i] != bf.pMem[i]) return 0;
-	return 1;*/
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
@@ -133,23 +118,6 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-	/*TELEM size = (BitLen > bf.BitLen) ? BitLen : bf.BitLen;
-	TBitField res(size);
-	if (BitLen < bf.BitLen)
-	{
-		for (int i = 0; i < bf.MemLen; i++)
-			res.pMem[i] = bf.pMem[i];
-		for (int i = 0; i < MemLen; i++)
-			res.pMem[i] = res.pMem[i] | pMem[i];
-	}
-	else
-	{
-		for (int i = 0; i < MemLen; i++)
-			res.pMem[i] = pMem[i];
-		for (int i = 0; i < bf.MemLen; i++)
-			res.pMem[i] = res.pMem[i] | bf.pMem[i];
-	}
-	return res;*/
 	TBitField temp(this->BitLen > bf.BitLen ? this->BitLen : bf.BitLen);
 	if (this->BitLen > bf.BitLen)
 	{
@@ -170,11 +138,22 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-	TELEM size = (BitLen > bf.BitLen) ? bf.MemLen : MemLen;
-	TBitField res((BitLen > bf.BitLen) ? MemLen : bf.MemLen);
-	for (int i = 0; i < size; i++)
-		res.pMem[i] = pMem[i] & bf.pMem[i];
-	return res;
+	if (BitLen > bf.BitLen)
+	{
+		TBitField result(BitLen);
+		for (int i = 0; i < bf.BitLen; i++)
+			if (GetBit(i) & bf.GetBit(i))
+				result.SetBit(i);
+		return result;
+	}
+	else
+	{
+		TBitField result(bf.BitLen);
+		for (int i = 0; i < BitLen; i++)
+			if (GetBit(i) & bf.GetBit(i))
+				result.SetBit(i);
+		return result;
+	}
 }
 
 TBitField TBitField::operator~(void) // отрицание
