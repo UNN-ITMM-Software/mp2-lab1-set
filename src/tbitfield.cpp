@@ -14,7 +14,8 @@ TBitField::TBitField(int len)
         throw  logic_error("ERROR");
     }
     BitLen = len;
-    MemLen = len % (8 * sizeof(TELEM));
+    MemLen = ((len - 1) / (8 * sizeof(TELEM))) + 1;
+    pMem = NULL;
     pMem = new TELEM[MemLen];
     for (int i = 0; i < MemLen; i++)
     {
@@ -48,7 +49,11 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-    return (n % (8 * sizeof(TELEM)));
+
+    if (n >= 0 && n < BitLen)
+        return n >> 5;
+    else
+        throw - 1;
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
@@ -97,26 +102,25 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 TBitField& TBitField::operator=(const TBitField& bf) // присваивание
 {
-    if (this == &bf)
-    {
-        return *this;
-    }
-
-    BitLen = bf.BitLen;
-    MemLen = bf.MemLen;
-    if (bf.MemLen != MemLen)
-    {
-        MemLen = bf.MemLen;
-        delete pMem;
-        pMem = new TELEM[MemLen];
-    }
-
-    for (int i = 0; i < MemLen; i++)
-    {
-        pMem[i] = bf.pMem[i];
-    }
-
+    if (this == &bf) //Проверка самоприсваивания
+  {
     return *this;
+  }
+
+  BitLen = bf.BitLen;
+  if (MemLen != bf.MemLen)
+  {
+    MemLen = bf.MemLen;
+    delete[] pMem;
+    pMem = new TELEM[MemLen];
+  }
+
+  for (int i = 0; i < MemLen; i++)
+  {
+    pMem[i] = bf.pMem[i];
+  }
+
+  return *this;
 }
 
 int TBitField::operator==(const TBitField& bf) const // сравнение
