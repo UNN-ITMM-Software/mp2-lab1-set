@@ -6,6 +6,7 @@
 // Битовое поле
 
 #include "tbitfield.h"
+#include <cmath>
 
 TBitField::TBitField(int len)
 {
@@ -31,7 +32,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
     pMem[i] = bf.pMem[i];
 }
 
-TBitField::~TBitField()
+TBitField::~TBitField() // деструктор
 {
   delete[] pMem;
 }
