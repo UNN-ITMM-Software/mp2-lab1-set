@@ -100,7 +100,7 @@ TBitField& TBitField::operator=(const TBitField& bf) // присваивание
 			pMem = new TELEM[MemLen];
 		}
 		for (int i = 0; i < MemLen; i++) {
-			pMem[i] = bf.pMem[i];
+		  pMem[i] = bf.pMem[i];
 		}
 	}
 	
