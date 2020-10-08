@@ -34,10 +34,10 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
-  if (pMem != nullptr)
+  if (pMem != NULL)
   {
     delete[] pMem;
-    pMem = nullptr;
+    pMem = NULL;
   }
 }
 
