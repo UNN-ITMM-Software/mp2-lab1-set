@@ -12,7 +12,7 @@ TBitField::TBitField(int len)
 {
   if (len <= 0)
     throw "Invalid len";
-  MemLen = (len + sizeof(TELEM) * 8 - 1) / (sizeof(TELEM) * 8);;
+   MemLen = int(ceil(len / (sizeof(TELEM) * 8.0)));
   pMem = new TELEM[MemLen];
   if (!pMem)
     throw "Memory error";
@@ -32,14 +32,21 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
     pMem[i] = bf.pMem[i];
 }
 
-TBitField::~TBitField() // деструктор
+TBitField::~TBitField()
 {
-  delete[] pMem;
+  if (pMem != nullptr)
+  {
+    delete[] pMem;
+    pMem = nullptr;
+  }
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-  return n / (sizeof(TELEM) * 8);
+  if (n >= 0 && n < BitLen) 
+    return (floor((double)n/(8*sizeof(TELEM))));
+  else
+    throw -1;
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
