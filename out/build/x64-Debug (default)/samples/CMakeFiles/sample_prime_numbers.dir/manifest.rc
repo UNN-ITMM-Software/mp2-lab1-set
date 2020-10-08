@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "D:/University/Programming/mp2-lab1-set/out/build/x64-Debug (default)/samples/CMakeFiles/sample_prime_numbers.dir/embed.manifest"
