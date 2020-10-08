@@ -7,19 +7,17 @@
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(1)
+TSet::TSet(int mp) : BitField(mp)
 {
 	if (mp < 0)
 		throw "error";
 	MaxPower = mp;
-	BitField = TBitField(MaxPower);
 }
 
 // конструктор копирования
-TSet::TSet(const TSet& s) : BitField(1)
+TSet::TSet(const TSet& s) : BitField(s.BitField)
 {
 	MaxPower = s.MaxPower;
-	BitField = s.BitField;
 }
 
 // конструктор преобразования типа
@@ -126,12 +124,20 @@ TSet TSet::operator~(void) // дополнение
 
 istream& operator>>(istream& istr, TSet& s) // ввод
 {
+	int temp; char ch;
+	do { istr >> ch; } while (ch != '{');
+	do {
+		istr >> temp;
+		s.InsElem(temp);
+		do {
+			istr >> ch;
+		} while ((ch != ',') && (ch != '}'));
+	} while (ch != '}');
 	return istr;
 }
 
 ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
-
 	for (int i = 0; i < s.BitField.GetLength(); i++)
 	{
 		if (s.BitField.GetBit(i))

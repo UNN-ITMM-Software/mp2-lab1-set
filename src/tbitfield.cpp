@@ -32,7 +32,8 @@ TBitField::TBitField(const TBitField& bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
-	delete[] pMem;
+	if (pMem)
+		delete[] pMem;
 }
 
 void TBitField::CheckIndex(const int value) const
