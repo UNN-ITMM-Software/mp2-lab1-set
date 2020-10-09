@@ -5,7 +5,8 @@
 //
 // Множество - реализация через битовые поля
 
-#include "set.h"
+#include "tset.h"
+#include "tbitfield.h"
 
 TSet::TSet(int mp) : BitField(mp)
 {
@@ -26,8 +27,7 @@ TSet::TSet(const TBitField& bf) : BitField(bf)
 
 TSet::operator TBitField()
 {
-  TBitField temp(this->BitField);
-  return temp;
+  return BitField;
 }
 
 int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
@@ -54,11 +54,8 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 
 TSet& TSet::operator=(const TSet& s) // присваивание
 {
-  if (this != &s)
-  {
-    MaxPower = s.MaxPower;
-    BitField = s.BitField;
-  }
+  MaxPower = s.MaxPower;
+  BitField = s.BitField;
   return *this;
 }
 
@@ -80,16 +77,18 @@ TSet TSet::operator+(const TSet& s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-  TSet temp(BitField);
-  temp.BitField.SetBit(Elem);
-  return temp;
+  TSet res(BitField);
+  if (Elem > MaxPower)
+    throw - 1;
+  res.InsElem(Elem);
+  return res;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-  TSet temp(BitField);
-  temp.BitField.ClrBit(Elem);
-  return temp;
+  TSet res(BitField);
+  res.DelElem(Elem);
+  return res;
 }
 
 TSet TSet::operator*(const TSet& s) // пересечение
@@ -100,45 +99,24 @@ TSet TSet::operator*(const TSet& s) // пересечение
 
 TSet TSet::operator~(void) // дополнение
 {
-  TSet temp(~BitField);
-  return temp;
+  TSet res(~BitField);
+  return res;
 }
 
 // перегрузка ввода/вывода
-// Формат данных - { i1, i2,...,  in}
 
 istream& operator>>(istream& istr, TSet& s) // ввод
 {
-  int temp;
-  char ch;
-  do
-  {
-    istr >> ch;
-  } while (ch != '{');
-  do
-  {
-    istr >> temp;
-    s.InsElem(temp);
-    do
-    {
-      istr >> ch;
-    } while ((ch != ',') && (ch != '}'));
-  } while (ch != '}');
+  int i;
+  cin >> i;
+  for (; ((i > -1) && (i < s.MaxPower)); cin >> i)
+    s.BitField.SetBit(i);
   return istr;
 }
 
 ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
-  int num;
-  char ch = ' ';
-  ostr << "{";
-  num = s.GetMaxPower();
-  for (int i = 0; i < num; i++)
-    if (s.IsMember(i))
-    {
-      ostr << ch << ' ' << i;
-      ch = ',';
-    }
-  ostr << "}";
+  cout << "MaxPower is " << s.MaxPower << endl;
+  cout << s.BitField;
   return ostr;
 }
