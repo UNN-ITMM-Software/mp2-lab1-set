@@ -31,15 +31,18 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
   }
 }
 
-TBitField::~TBitField()
+TBitField::~TBitField() // деструктор
 {
-  delete[] pMem;
-  pMem = NULL;
+  if (pMem)
+    delete[] pMem;
+  else
+    throw "Object is destroyed";
+  pMem = 0;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-  return n / (sizeof(TELEM) * 8);
+  return int(floor(n / (sizeof(TELEM) * 8.)));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
@@ -139,7 +142,6 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
     return result;
   }
 }
-
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
