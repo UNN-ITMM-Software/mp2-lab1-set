@@ -2,12 +2,12 @@
 
 #include <gtest.h>
 
-// первый тест 
+// first test
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));
 }
-//второй тест
+//second test
 TEST(TBitField, can_get_length)
 {
   TBitField bf(3);
