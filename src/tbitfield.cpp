@@ -31,13 +31,13 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
   }
 }
 
-TBitField::~TBitField() // деструктор
+TBitField::~TBitField() //деструктор
 {
-  if (pMem)
+  if (pMem != nullptr)
+  {
     delete[] pMem;
-  else
-    throw "Object is destroyed";
-  pMem = 0;
+    pMem = nullptr;
+  }
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
