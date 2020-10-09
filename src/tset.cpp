@@ -126,7 +126,7 @@ istream& operator>>(istream& istr, TSet& s) // ввод
 	return istr;
 }
 
-ostream& operator<<(ostream& ostr, const TSet& s) //вывод1
+ostream& operator<<(ostream& ostr, const TSet& s) //вывод
 {
 	int i, n; char ch = '{';
 	n = s.GetMaxPower();

@@ -255,7 +255,7 @@ istream& operator>>(istream& istr, TBitField& bf) // ввод
 	return istr;
 }
 
-ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод1
+ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
 {
 	int len = bf.GetLength();
 	for (int i = 0; i < len; i++)
