@@ -21,7 +21,7 @@ TEST(TBitField, new_bitfield_is_set_to_zero)
   int sum = 0;
   for (int i = 0; i < bf.GetLength(); i++)
   {
-    sum += bf.GetBit(i);
+  sum += bf.GetBit(i);
   }
 
   EXPECT_EQ(0, sum);
@@ -103,7 +103,7 @@ TEST(TBitField, can_assign_bitfields_of_equal_size)
   TBitField bf1(size), bf2(size);
   for (int i = 0; i < size; i++)
   {
-    bf1.SetBit(i);
+  bf1.SetBit(i);
   }
   bf2 = bf1;
 
@@ -117,7 +117,7 @@ TEST(TBitField, assign_operator_changes_bitfield_size)
   TBitField bf1(size1), bf2(size2);
   for (int i = 0; i < size1; i++)
   {
-    bf1.SetBit(i);
+  bf1.SetBit(i);
   }
   bf2 = bf1;
 
@@ -130,7 +130,7 @@ TEST(TBitField, can_assign_bitfields_of_non_equal_size)
   TBitField bf1(size1), bf2(size2);
   for (int i = 0; i < size1; i++)
   {
-    bf1.SetBit(i);
+  bf1.SetBit(i);
   }
   bf2 = bf1;
 
@@ -144,7 +144,7 @@ TEST(TBitField, compare_equal_bitfields_of_equal_size)
   TBitField bf1(size), bf2(size);
   for (int i = 0; i < size; i++)
   {
-    bf1.SetBit(i);
+  bf1.SetBit(i);
   }
   bf2 = bf1;
 
@@ -245,7 +245,7 @@ TEST(TBitField, can_invert_large_bitfield)
   negBf = ~bf;
 
   for(int i = 0; i < size; i++)
-    expNegBf.SetBit(i);
+  expNegBf.SetBit(i);
   expNegBf.ClrBit(35);
 
   EXPECT_EQ(expNegBf, negBf);
@@ -284,14 +284,14 @@ TEST(TBitField, can_invert_many_random_bits_bitfield)
   bits.push_back(37);
 
   for (unsigned int i = 0; i < bits.size(); i++)
-    bf.SetBit(bits[i]);
+  bf.SetBit(bits[i]);
 
   negBf = ~bf;
 
   for(int i = 0; i < size; i++)
-    expNegBf.SetBit(i);
+  expNegBf.SetBit(i);
   for (unsigned int i = 0; i < bits.size(); i++)
-    expNegBf.ClrBit(bits[i]);
+  expNegBf.ClrBit(bits[i]);
 
   EXPECT_EQ(expNegBf, negBf);
 }
