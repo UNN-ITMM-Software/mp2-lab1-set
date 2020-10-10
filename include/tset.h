@@ -9,6 +9,7 @@
 #define __SET_H__
 
 #include "tbitfield.h"
+#include <fstream>
 
 class TSet
 {
