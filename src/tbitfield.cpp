@@ -12,8 +12,11 @@ TBitField::TBitField(int len)
   if (len < 1) 
   throw "Wrong size";
   BitLen = len;
-  MemLen = (BitLen - 1) / (sizeof(TELEM) * 8) + 1;
+  MemLen = ceil((double)(len) / (sizeof(TELEM) * 8));
+  pMem = nullptr;
   pMem = new TELEM[MemLen];
+  if (pMem == nullptr) 
+    throw "Memmory Error";
   for (int i = 0; i < MemLen; i++)
   pMem[i] = 0u;
 }
@@ -22,20 +25,24 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 {
   BitLen = bf.BitLen;
   MemLen = bf.MemLen;
+  pMem = nullptr;
   pMem = new TELEM[MemLen];
+  if (pMem == nullptr)
+    throw "Memmory Error";
   for (int i = 0; i < MemLen; i++)
   pMem[i] = bf.pMem[i];
 }
 
 TBitField::~TBitField()
 {
-  delete[] pMem;
+  if (pMem != nullptr)
+    delete[] pMem;
   pMem = nullptr;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-  return n / (sizeof(TELEM) * 8);
+  return (floor((double)(n) / (sizeof(TELEM) * 8)));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
@@ -77,7 +84,10 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
   BitLen = bf.BitLen;
   MemLen = bf.MemLen;
+  pMem = nullptr;
   pMem = new TELEM[MemLen];
+  if (pMem == nullptr) 
+    throw "Memmory Error";
   for (int i = 0; i < MemLen; i++)
   pMem[i] = bf.pMem[i];
   return *this;
@@ -85,10 +95,12 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
+  if (this == &bf) 
+    return 1;
   if (BitLen != bf.BitLen)
-  return 0;
+    return 0;
   for (int i = 0; i < BitLen; i++)
-  if (GetBit(i) != bf.GetBit(i)) return 0;
+    if (GetBit(i) != bf.GetBit(i)) return 0;
   return 1;
 }
 
