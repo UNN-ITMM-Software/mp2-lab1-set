@@ -26,6 +26,7 @@ public:
   void DelElem(const int Elem);       // удалить элемент из множества
   int IsMember(const int Elem) const; // проверить наличие элемента в множестве
   // теоретико-множественные операции
+  int create_fib();
   int operator== (const TSet &s) const; // сравнение
   int operator!= (const TSet &s) const; // сравнение
   TSet& operator=(const TSet &s);  // присваивание

@@ -59,6 +59,26 @@ TSet& TSet::operator=(const TSet &s) // присваивание
 	return(*this);
 }
 
+int TSet::create_fib()
+{
+
+	int res = 1, fib1 = 1, fib2 = 1, tmp = 0;
+	for (int i = 0; i < BitField.GetMemLen(); i++) {
+		for (int j = 0; j < BitField.GetLength(); j++) {
+			if (fib2 == (i * 32 + j)) {
+				BitField.SetBit(j);
+				res += j;
+				tmp = fib1;
+				fib1 = fib2;
+				fib2 += tmp;
+			}
+		}
+	}
+	//cout << "Fibonacci numbers:" << (*this) << endl;
+	cout << "The result is:" << res << endl;
+	return res;
+}
+
 int TSet::operator==(const TSet &s) const // сравнение
 {
 	return(((*this).BitField == s.BitField) && ((this->MaxPower) == s.MaxPower));
