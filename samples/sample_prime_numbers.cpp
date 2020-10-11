@@ -7,10 +7,10 @@
 
 #include <iomanip>
 
-// #define USE_SET // Использовать класс TSet,
+//#define USE_SET // Использовать класс TSet,
                 // закоментировать, чтобы использовать битовое поле
 
-#ifndef USE_SET // Использовать класс TBitField
+/*#ifndef USE_SET // Использовать класс TBitField
 
 #include "tbitfield.h"
 
@@ -91,4 +91,25 @@ int main()
   cout << "В первых " << n << " числах " << count << " простых" << endl;
 }
 
-#endif
+#endif*/
+
+#include <iostream>
+#include <tset.h>
+using namespace std;
+
+int main() {
+    int n = 0, r;
+    int* fib;
+    cout << "Please enter the desired quantity of Fibonacci numbers:" << endl;
+    cin >> n;
+    fib = new int[n];
+    fib[0] = 1;
+    fib[1] = 1;
+    for (int i = 2; i < n; i++) {
+        fib[i] = fib[i - 1] + fib[i - 2];
+    }
+    r = fib[n - 1];
+    delete[] fib;
+    TSet set(r + 1);
+    set.create_fib();
+}
