@@ -107,8 +107,11 @@ ostream& operator<<(ostream& ostr, TSet& bf)
 	n = bf.GetMaxPower();
 	for (i = 0; i < n; i++)
 	{
-		ostr << ch << ' ' << i;
-		ch = ',';
+		if (bf.IsMember(i))
+		{
+			ostr << ch << ' ' << i;
+			ch = ',';
+		}
 	}
 	ostr << '}';
 	return ostr;
