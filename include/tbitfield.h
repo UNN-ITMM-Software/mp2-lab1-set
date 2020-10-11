@@ -9,10 +9,12 @@
 #define __BITFIELD_H__
 
 #include <iostream>
+#include <bitset>
+#include <math.h>
 
 using namespace std;
 
-typedef unsigned int TELEM;
+using TELEM = unsigned int;
 
 class TBitField
 {
@@ -30,6 +32,7 @@ public:
   ~TBitField();                      //                                    (#С)
 
   // доступ к битам
+  int GetMemLen() const;
   int GetLength(void) const;      // получить длину (к-во битов)           (#О)
   void SetBit(const int n);       // установить бит                       (#О4)
   void ClrBit(const int n);       // очистить бит                         (#П2)

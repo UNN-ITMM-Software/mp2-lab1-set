@@ -6,13 +6,13 @@
 // Тестирование битового поля и множества
 
 #include <iomanip>
-
+#include <string>
 // #define USE_SET // Использовать класс TSet,
                 // закоментировать, чтобы использовать битовое поле
 
 #ifndef USE_SET // Использовать класс TBitField
 
-#include "tbitfield.h"
+/*#include "tbitfield.h"
 
 int main()
 {
@@ -50,13 +50,15 @@ int main()
   cout << endl;
   cout << "В первых " << n << " числах " << count << " простых" << endl;
 }
-#else
 
-#include "tset.h"
+else*/
+
+include "tset.h"
 
 int main()
 {
-  int n, m, k, count;
+ /*
+    int n, m, k, count;
 
   setlocale(LC_ALL, "Russian");
   cout << "Тестирование программ поддержки множества" << endl;
@@ -89,6 +91,82 @@ int main()
     }
   cout << endl;
   cout << "В первых " << n << " числах " << count << " простых" << endl;
+}*/
+
+/*try {
+      TSet m(20);
+      cout << "Input elements:" << endl;
+      int t;
+      for (int i = 0; i < 11; i++)
+      {
+          cin >> t;
+          m.InsElem(t);
+      }
+      cin >> m;
+      cout << m;
+  }
+  catch (logic_error& e)
+  {
+      cout << e.what();
+  }*/
+
+  //Доп.задание 1: запись в файл и чтение из файла
+TSet m(20);
+cin >> m;
+
+ofstream myfile_w;
+myfile_w.open("myset.txt");
+myfile_w << m;
+myfile_w.close();
+
+string line;
+ifstream myfile_r("myset.txt");
+if (myfile_r.is_open())
+{
+    getline(myfile_r, line);
+    int n = stoi(line);
+    TSet m2(n);
+
+    getline(myfile_r, line);
+    string number;
+
+    for (char& c : line)
+    {
+        if (c >= '0' && c <= '9')
+            number += c;
+        if (c == ' ')
+        {
+            m2.InsElem(stoi(number));
+            number = "";
+        }
+    }
+
+
+    myfile_r.close();
+
+    cout << m2 << endl;
+}
+
+//Доп.задание 2: найти элементы, которые являются степенью тройки
+int n;
+cout << "Input MaxPower: ";
+cin >> n;
+TSet m3(n);
+cin >> m3;
+cout << m3 << endl;
+
+int pow = 1;
+while (pow <= n)
+{
+    if (m3.IsMember(pow))
+        cout << pow << " ";
+    pow *= 3;
+}
+
+
+// system("pause");
+
+
 }
 
 #endif
