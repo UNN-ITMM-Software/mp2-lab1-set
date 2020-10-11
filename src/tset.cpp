@@ -22,7 +22,7 @@ TSet::TSet(const TSet& s)
 TSet::TSet(const TBitField &bf)
 {
 	(*this).BitField=bf;
-	(*this).MaxPower = bf.GetMemLen()*sizeof(TELEM)*8;
+	(*this).MaxPower = bf.GetLength();
 }
 
 TSet::operator TBitField()
@@ -92,7 +92,7 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 	TSet a(*this);
 
 	a.BitField.ClrBit(Elem);
-	return(*this);
+	return(a);
 }
 
 TSet TSet::operator*(const TSet &s) // пересечение
