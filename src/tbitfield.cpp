@@ -6,13 +6,14 @@
 // Битовое поле
 
 #include "tbitfield.h"
+#include <math.h>
 
 TBitField::TBitField(int len)
 {
   if (len < 0)
     throw exception();
   BitLen = len;
-  MemLen = (len + sizeof(TELEM) * 8 - 1) / (sizeof(TELEM) * 8);
+  MemLen = floor((len + sizeof(TELEM) * 8 - 1) / (sizeof(TELEM) * 8));
   pMem = new TELEM[MemLen];
   if (pMem != NULL)
     for (int i = 0; i < MemLen; i++)
@@ -40,13 +41,13 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-  
-  return n / (sizeof(TELEM) * 8);
+
+  return floor(n / (sizeof(TELEM) * 8));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
- 
+
   return 1 << (n & (sizeof(TELEM) * 8 - 1));
 }
 
@@ -62,7 +63,7 @@ void TBitField::SetBit(const int n) // установить бит
   if (n > -1 && n < BitLen)
     pMem[GetMemIndex(n)] |= GetMemMask(n);
   else
-  throw exception();
+    throw exception();
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
@@ -70,7 +71,7 @@ void TBitField::ClrBit(const int n) // очистить бит
   if (n > -1 && n < BitLen)
     pMem[GetMemIndex(n)] &= ~GetMemMask(n);
   else
-  throw exception();
+    throw exception();
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
@@ -79,7 +80,7 @@ int TBitField::GetBit(const int n) const // получить значение б
     return pMem[GetMemIndex(n)] & GetMemMask(n);
   else
     throw exception();
-  
+
 }
 
 // битовые операции
@@ -150,8 +151,16 @@ TBitField TBitField::operator~(void) // отрицание
 {
   int len = BitLen;
   TBitField temp(len);
-  for (int i = 0; i < MemLen; i++)
+  for (int i = 0; i < MemLen - 1; i++)
     temp.pMem[i] = ~pMem[i];
+  temp.pMem[MemLen - 1] = pMem[MemLen - 1];
+  for (int i = (MemLen - 1) * (sizeof(TELEM) * 8); i < (MemLen - 1) * (sizeof(TELEM) * 8) + BitLen % (sizeof(TELEM) * 8); i++)
+  {
+    if (!temp.GetBit(i))
+      temp.SetBit(i);
+    else
+      temp.ClrBit(i);
+  }
   return temp;
 }
 
@@ -164,7 +173,7 @@ istream& operator>>(istream& istr, TBitField& bf) // ввод
   do
   {
     istr >> ch;
-  } while (ch==' ');
+  } while (ch == ' ');
   while (true)
   {
     if (ch == '0')
