@@ -1,3 +1,5 @@
+
+
 // ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
 //
 // tbitfield.cpp - Copyright (c) Гергель В.П. 07.05.2001
@@ -9,11 +11,16 @@
 
 TBitField::TBitField(int len)
 {
-    MemLen = sizeof(int) * 8;
-    pMem = new TELEM[(len + MemLen - 1) / MemLen];
-    if (pMem != NULL)
-        for (int i = 0;i < MemLen;i++)
-            pMem[i] = 0;
+    if (len > 0) {
+        BitLen = len;
+        int size = sizeof(TELEM) * 8;
+        MemLen = (len + size - 1) / size;
+        pMem = new TELEM[MemLen];
+        if (pMem != NULL)
+            for (int i = 0;i < MemLen;i++)
+                pMem[i] = 0;
+    }
+    else throw - 1;
 
 }
 
@@ -35,12 +42,12 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-    return n / MemLen;
+    return n / (sizeof(TELEM) * 8);
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-    return n % MemLen;
+    return 1 << (n % (sizeof(TELEM) * 8));
 }
 
 // доступ к битам битового поля
@@ -50,19 +57,28 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
     return BitLen;
 }
 
+
 void TBitField::SetBit(const int n) // установить бит
 {
-    (*pMem) |= 1 << n;
+    if ((n > -1) && (n < BitLen))
+        pMem[GetMemIndex(n)] |= GetMemMask(n);
+    else throw - 1;
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
-    (*pMem) &= ~(1 << n);
+    if ((n >= 0) && (n < BitLen))
+        (*pMem) &= ~(1 << n);
+    else throw - 1;
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
-     return (*pMem & (1 << n));
+    if ((n > -1) && (n < BitLen))
+        return pMem[GetMemIndex(n)] & GetMemMask(n);
+    else throw - 1;
+    
+   
 }
 
 // битовые операции
@@ -132,9 +148,13 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 
 TBitField TBitField::operator~(void) // отрицание
 {
-    TBitField tmp(BitLen);
-    for (int i = 0;i < MemLen;i++)
-        tmp.pMem[i] = ~pMem[i];
+    TBitField tmp(*this);
+    for (int i = 0; i < tmp.BitLen; i++) {
+        if (tmp.GetBit(i))
+            tmp.ClrBit(i);
+        else
+            tmp.SetBit(i);
+    }
     return tmp;
 
 }
