@@ -71,7 +71,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 int TBitField::GetLength(void) const // получить длину (к-во битов)
 {
 	return BitLen;
-}
+} 
 
 void TBitField::SetBit(const int n) // установить бит
 {
