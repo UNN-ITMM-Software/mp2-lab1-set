@@ -131,3 +131,29 @@ ostream& operator<<(ostream& ostr, const TSet& s) // вывод
   ostr << '}';
   return ostr;
 }
+
+// дополнительные задания
+
+string TSet::GetElemsModK(int k)
+{
+  string s = "";
+  int len = BitField.GetLength();
+  for (int i = 0; i < len; i++)
+    if (BitField.GetBit(i) && i % k == 0)
+      s += i + 48;
+  return s;
+}
+
+void TSet::ChangeElem(int n)
+{
+  if (BitField.GetBit(n))
+    BitField.ClrBit(n);
+  else
+    BitField.SetBit(n);
+}
+
+ofstream& operator<<(ofstream& out, const TSet s)
+{
+  out << s;
+  return out;
+}

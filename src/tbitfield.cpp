@@ -196,3 +196,4 @@ ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
       ostr << '0';
   return ostr;
 }
+
