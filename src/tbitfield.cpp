@@ -14,9 +14,9 @@ TBitField::TBitField(int len)
   {
     BitLen = len;
     MemLen = int(ceil((double)BitLen / 8 * sizeof(TELEM)));
-    pMem = nullptr;
+    pMem = NULL;
     pMem = new TELEM[MemLen];
-    if (pMem != nullptr)
+    if (pMem != NULL)
       for (int i = 0; i < MemLen; i++)
         pMem[i] = 0;
     else
@@ -30,9 +30,9 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 {
   BitLen = bf.BitLen;
   MemLen = bf.MemLen;
-  pMem = nullptr;
+  pMem = NULL;
   pMem = new TELEM[MemLen];
-  if (pMem != nullptr)
+  if (pMem != NULL)
     for (int i = 0; i < MemLen; i++)
        pMem[i] = bf.pMem[i];
   else
@@ -41,9 +41,11 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
-  delete[] pMem;
-  pMem = nullptr;
- 
+  if (pMem != NULL)
+  {
+    delete[] pMem;
+    pMem = NULL;
+  }
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
@@ -127,8 +129,8 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
   if (BitLen != bf.BitLen)
     res = 0; //Соответственно идет сравнение MemLen и bf.MemLen 
   else
-    for (int i = 0; i < BitLen; i++)
-      if (GetBit(i) != bf.GetBit(i))
+    for (int i = 0; i < MemLen; i++)
+      if (pMem[i] != bf.pMem[i])
       {
         res = 0;
         break;
@@ -141,7 +143,7 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
   bool res = 1;
   if (BitLen == bf.BitLen) //Соответственно идет сравнение MemLen и bf.MemLen 
     for (int i = 0; i < MemLen; i++)
-      if (GetBit(i) == bf.GetBit(i))
+      if (pMem[i] == bf.pMem[i])
         res = 0;
       else
       {
