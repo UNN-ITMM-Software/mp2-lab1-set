@@ -309,3 +309,161 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+
+//1
+TEST(TBitField, bitfield_met_all_elem_degree_of_number_correct)
+{
+	const int size = 10;
+	TBitField bf1(size);
+
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+	bf1.SetBit(4);
+	bf1.SetBit(5);
+	bf1.SetBit(6);
+	bf1.SetBit(8);
+
+	ASSERT_NO_THROW(bf1.all_elem_degree_of_number(2));
+}
+
+TEST(TBitField, bitfield_met_all_elem_degree_of_number_overflow)
+{
+	const int size = 10;
+	TBitField bf1(size);
+
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+	bf1.SetBit(4);
+	bf1.SetBit(5);
+	bf1.SetBit(6);
+	bf1.SetBit(8);
+
+	ASSERT_ANY_THROW(bf1.all_elem_degree_of_number(11));
+}
+
+TEST(TBitField, bitfield_met_all_elem_degree_of_number_negative)
+{
+	const int size = 10;
+	TBitField bf1(size);
+
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+	bf1.SetBit(4);
+	bf1.SetBit(5);
+	bf1.SetBit(6);
+	bf1.SetBit(8);
+
+	ASSERT_ANY_THROW(bf1.all_elem_degree_of_number(-1));
+}
+
+//2
+TEST(TBitField, bitfield_met_all_elem_multiple_correct)
+{
+	const int size = 10;
+	TBitField bf1(size);
+
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+	bf1.SetBit(4);
+	bf1.SetBit(5);
+	bf1.SetBit(6);
+	bf1.SetBit(8);
+
+	ASSERT_NO_THROW(bf1.all_elem_multiple(2));
+}
+
+TEST(TBitField, bitfield_met_all_elem_multiple_overflow)
+{
+	const int size = 10;
+	TBitField bf1(size);
+
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+	bf1.SetBit(4);
+	bf1.SetBit(5);
+	bf1.SetBit(6);
+	bf1.SetBit(8);
+
+	ASSERT_ANY_THROW(bf1.all_elem_multiple(11));
+}
+
+TEST(TBitField, bitfield_met_all_elem_multiple_negative)
+{
+	const int size = 10;
+	TBitField bf1(size);
+
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+	bf1.SetBit(4);
+	bf1.SetBit(5);
+	bf1.SetBit(6);
+	bf1.SetBit(8);
+
+	ASSERT_ANY_THROW(bf1.all_elem_multiple(-1));
+}
+
+//3
+TEST(TBitField, bitfield_met_specified_number_correct)
+{
+	const int size = 10;
+	TBitField bf1(size);
+
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+	bf1.SetBit(4);
+	bf1.SetBit(5);
+	bf1.SetBit(6);
+	bf1.SetBit(8);
+
+	int temp = bf1.specified_number(6);
+
+	EXPECT_EQ(5,temp);
+}
+
+TEST(TBitField, bitfield_met_specified_number_overflow)
+{
+	const int size = 10;
+	TBitField bf1(size);
+
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+	bf1.SetBit(4);
+	bf1.SetBit(5);
+	bf1.SetBit(6);
+	bf1.SetBit(8);
+
+	ASSERT_ANY_THROW(bf1.specified_number(11));
+}
+
+TEST(TBitField, bitfield_met_specified_number_negative)
+{
+	const int size = 10;
+	TBitField bf1(size);
+
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+	bf1.SetBit(4);
+	bf1.SetBit(5);
+	bf1.SetBit(6);
+	bf1.SetBit(8);
+
+
+	ASSERT_ANY_THROW(bf1.specified_number(-1));
+}
+
+TEST(TBitField, bitfield_met_specified_number_not_exist)
+{
+	const int size = 10;
+	TBitField bf1(size);
+
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+	bf1.SetBit(4);
+	bf1.SetBit(5);
+	bf1.SetBit(6);
+	bf1.SetBit(8);
+
+
+	EXPECT_EQ(0,bf1.specified_number(7));
+}
