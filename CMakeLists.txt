@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 
 set(PROJECT_NAME set)
 project(${PROJECT_NAME})
-set (CMAKE_CXX_STANDARD 11)
 
 # TODO(Kornyakov): not sure if these lines are needed
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
