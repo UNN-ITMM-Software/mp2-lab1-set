@@ -77,7 +77,7 @@ TSet TSet::operator+(const TSet& s) // объединение
 	return TSet(BitField | s.BitField);
 }
 
-TSet TSet::operator+(const int Elem) // объединение с элементом
+TSet TSet::operator+(const int Elem) // объединение с  элементом
 {
 	TSet res(*this);
 	res.BitField.SetBit(Elem);
