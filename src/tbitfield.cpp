@@ -6,7 +6,7 @@
 // Множество - реализация через битовые поля
 
 #include "tbitfield.h"
-#include <math.h>
+#include <cmath>
 
 TBitField::TBitField(int len)
 {
