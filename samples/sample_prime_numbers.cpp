@@ -89,17 +89,21 @@ int main()
     }
   cout << endl;
   cout << "В первых " << n << " числах " << count << " простых" << endl;*/
-  const int size = 4;
-  TSet set(size), set1(size), expSet(size);
-  // set1 = {1, 3}
-  set.InsElem(1);
-  set.InsElem(3);
-  set1 = ~set;
-  // expSet = {0, 2}
-  expSet.InsElem(0);
-  expSet.InsElem(2);
- 
-  cout << (set1 == expSet);
+  const int firstSze = 4, secondSize = 8;
+  TBitField firstBf(firstSze), negFirstBf(firstSze), secondBf(secondSize), testBf(secondSize);
+  // firstBf = 0001
+  firstBf.SetBit(0);
+  negFirstBf = ~firstBf;
+  // negFirstBf = 1110
+
+  // secondBf = 00011000
+  secondBf.SetBit(3);
+  secondBf.SetBit(4);
+
+  // testBf = 00001000
+  testBf.SetBit(3);
+  secondBf = secondBf & negFirstBf;
+  cout<<(secondBf==testBf);
 }
 
 #endif
