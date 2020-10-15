@@ -35,9 +35,32 @@ public:
                                    // элемент должен быть из того же универса
   TSet operator+ (const TSet &s);  // объединение
   TSet operator* (const TSet &s);  // пересечение
-  TSet operator~ (void);           // дополнение
+  TSet operator~ (void);// дополнение
+  int Fib() {
+    int s;
+    for (int i = 0; i < MaxPower; i++) {
+      
+      if (BitField.GetBit(i))
+        s = i;
+    }
+    int j = 1;
 
-  friend istream &operator>>(istream &istr, TSet &bf);
-  friend ostream &operator<<(ostream &ostr, const TSet &bf);
+    for (int i = 1; i <= s;)
+    {
+      if ((*this).IsMember(i))
+      {
+
+        return 1;
+      }
+     
+      int t = j;
+      j = i;
+      i = t + j;
+
+    }
+    return 0;
+  }
+  friend ostream& operator << (ostream& ostr, const TSet& in);
+  friend istream& operator >> (istream& istr, TSet& out);
 };
 #endif
