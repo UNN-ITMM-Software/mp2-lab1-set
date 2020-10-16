@@ -39,5 +39,7 @@ public:
 
   friend istream &operator>>(istream &istr, TSet &bf);
   friend ostream &operator<<(ostream &ostr, const TSet &bf);
+  friend ifstream& operator>>(ifstream& ifstr, TSet& bf);
+  friend ofstream& operator<<(ofstream& ofstr, const TSet& bf);
 };
 #endif
