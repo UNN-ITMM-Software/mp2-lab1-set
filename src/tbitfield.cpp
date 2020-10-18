@@ -204,8 +204,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 	}
 	for (int i = 0; i < temp.MemLen; i++)
 		temp.pMem[i] |= bf.pMem[i];
-	*this = temp;
-	return (*this);
+	return temp;
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
@@ -249,8 +248,7 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 	}
 	for (int i = 0; i < temp.MemLen; i++)
 		temp.pMem[i] &= bf.pMem[i];
-	*this = temp;
-	return (*this);
+	return temp;
 }
 
 TBitField TBitField::operator~(void) // отрицание
