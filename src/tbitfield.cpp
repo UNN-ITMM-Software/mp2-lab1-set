@@ -113,7 +113,8 @@ int TBitField::operator==(const TBitField& bf) const // сравнение
 		return (*this);
 	}
 
-	if ((*this).GetLength() == bf.GetLength())
+	if ((*this).GetLength() == bf.GetLength()) {
+	if ((*this).GetMemLen() == bf.GetMemLen())	
 	{
 		for (int i = 0; i < (*this).GetMemLen(); i++)
 		{
@@ -124,6 +125,7 @@ int TBitField::operator==(const TBitField& bf) const // сравнение
 		}
 		return 1;
 	}
+	}
 	return 0;
 }
 
@@ -132,7 +134,8 @@ int TBitField::operator!=(const TBitField& bf) const // сравнение
 	if (this == &bf) {
 		return (*this);
 	}
-	if ((*this).GetLength() == bf.GetLength())
+	if ((*this).GetLength() == bf.GetLength()) {
+        if ((*this).GetMemLen() == bf.GetMemLen()) 	
 	{
 		for (int i = 0; i < (*this).GetMemLen(); i++)
 		{
@@ -143,6 +146,7 @@ int TBitField::operator!=(const TBitField& bf) const // сравнение
 		}
 		return 0;
 	}
+        }
 	return 1;
 }
 
