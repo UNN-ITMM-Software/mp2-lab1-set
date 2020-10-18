@@ -152,58 +152,56 @@ int TBitField::operator!=(const TBitField& bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 {
-	if (bf.BitLen > (*this).BitLen) (*this).BitLen = bf.BitLen;
-	if ((this->MemLen) < bf.MemLen)
+	TBitField temp(BitLen);
+	temp = *this;
+	if (bf.BitLen > temp.BitLen) temp.BitLen = bf.BitLen;
+	if (temp.MemLen < bf.MemLen)
 	{
-		TELEM* ptr = (this->pMem);
-		pMem = new TELEM[bf.MemLen];
-		for (int i = 0; i < MemLen; i++)
+		TELEM* temp_pMem = temp.pMem;
+		delete[] temp.pMem; 
+		temp.pMem = new TELEM[bf.MemLen];
+		for (int i = 0; i < temp.MemLen; i++)
 		{
-			pMem[i] = ptr[i];
+			temp.pMem[i] = temp_pMem[i] | bf.pMem[i];
 		}
-		for (int i = MemLen; i < bf.MemLen; i++)
+		for (int i = temp.MemLen; i < bf.MemLen; i++)
 		{
-			pMem[i] = 0;
+			temp.pMem[i] = 0;
 		}
-		delete[]ptr;
-		MemLen = bf.MemLen;
+		delete[] temp_pMem;
+		temp.MemLen = bf.MemLen;
 
 	}
-	TBitField p(this->BitLen);
-	for (int i = 0; i < bf.GetMemLen(); i++)
-	{
-		p.pMem[i] = (*this).pMem[i] | bf.pMem[i];
-	}
-	return (p);
+	for (int i = 0; i < temp.MemLen; i++)
+		temp.pMem[i] |= bf.pMem[i];
+	return temp;
 }
 
 TBitField TBitField::operator&(const TBitField& bf) // операция "и"
 {
-	if (bf.BitLen > (*this).BitLen) (*this).BitLen = bf.BitLen;
-	if ((this->MemLen) < bf.MemLen)
+	TBitField temp(BitLen);
+	temp = *this;
+	if (bf.BitLen > temp.BitLen) temp.BitLen = bf.BitLen;
+	if (temp.MemLen < bf.MemLen)
 	{
-		TELEM* ptr = (this->pMem);
-		pMem = new TELEM[bf.MemLen];
-
-		for (int i = 0; i < MemLen; i++)
+		TELEM* temp_pMem = temp.pMem;
+		delete[] temp.pMem; 
+		temp.pMem = new TELEM[bf.MemLen];
+		for (int i = 0; i < temp.MemLen; i++)
 		{
-			pMem[i] = ptr[i];
+			temp.pMem[i] = temp_pMem[i] & bf.pMem[i];
 		}
-
-		for (int i = MemLen; i < bf.MemLen; i++)
+		for (int i = temp.MemLen; i < bf.MemLen; i++)
 		{
-			pMem[i] = 0;
+			temp.pMem[i] = 0;
 		}
-		delete[]ptr;
-		MemLen = bf.MemLen;
+		delete[] temp_pMem;
+		temp.MemLen = bf.MemLen;
 
 	}
-	TBitField p(this->BitLen);
-	for (int i = 0; i < bf.GetMemLen(); i++)
-	{
-		p.pMem[i] = (*this).pMem[i] & bf.pMem[i];
-	}
-	return (p);
+	for (int i = 0; i < temp.MemLen; i++)
+		temp.pMem[i] &= bf.pMem[i];
+	return temp;
 }
 
 TBitField TBitField::operator~(void) // отрицание
