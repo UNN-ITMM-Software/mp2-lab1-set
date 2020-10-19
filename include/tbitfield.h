@@ -45,6 +45,14 @@ public:
 
   friend istream &operator>>(istream &istr, TBitField &bf);       //      (#О7)
   friend ostream &operator<<(ostream &ostr, const TBitField &bf); //      (#П4)
+
+  //доп задание
+  //1
+  void all_elem_degree_of_number(const int);// степень
+  //2
+  void all_elem_multiple(const int);		// кратность
+  //3
+  int specified_number(const int);			// номер
 };
 // Структура хранения битового поля
 //   бит.поле - набор битов с номерами от 0 до BitLen

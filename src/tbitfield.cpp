@@ -17,11 +17,10 @@ TBitField::TBitField(int len)
 		throw std::logic_error("Input error: invalide value of lenght int in constructor");
 	}
 	BitLen = len;
-	MemLen = (len + 255) >> 8;
+	MemLen = (len + 15) >> sizeof(TELEM);
 	pMem = new TELEM[MemLen];
-	if (pMem != NULL)
-		for (int i = 0; i < MemLen; i++)
-			pMem[i] = 0;
+	for (int i = 0; i < MemLen; i++)
+		pMem[i] = 0;
 	//}
 	//else
 	//{
@@ -36,9 +35,8 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 	BitLen = bf.BitLen;
 	MemLen = bf.MemLen;
 	pMem = new TELEM[MemLen];
-	if (pMem != NULL)
-		for (int i = 0; i < MemLen; i++)
-			pMem[i] = bf.pMem[i];
+	for (int i = 0; i < MemLen; i++)
+		pMem[i] = bf.pMem[i];
 }
 
 TBitField::~TBitField()
@@ -51,7 +49,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 {
 	if (n < 0)
 		throw std::logic_error("Input error: invalide value of lenght int in index");
-	int temp = n >> 8;
+	int temp = n >> sizeof(TELEM);
 	return temp;
 }
 
@@ -59,7 +57,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 {
 	if (n < 0)
 		throw std::logic_error("Input error: invalide value of lenght int in mask");
-	TELEM temp = n & 255;
+	TELEM temp = n & 15;
 	return 1 << temp;
 }
 
@@ -101,10 +99,15 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
 	TELEM test;
 	BitLen = bf.BitLen;
-	MemLen = bf.MemLen;
-	if (pMem != NULL)
-		delete[]pMem;
-	pMem = new TELEM[MemLen];
+
+	if(MemLen!=bf.MemLen)
+		if (pMem != NULL)
+		{
+			delete[]pMem;
+			MemLen = bf.MemLen;
+			pMem = new TELEM[MemLen];
+		}
+	
 	if (pMem != NULL)
 		for (int i = 0; i < MemLen; i++)
 		{
@@ -118,34 +121,31 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-	int f = 1;
 	if ((BitLen != bf.BitLen) || (MemLen != bf.MemLen))
-		f = 0;
+		return 0;
 	else
 		for (int i = 0; i < MemLen; i++)
 			if (pMem[i] != bf.pMem[i])
 			{
-				f = 0;
-				break;
+				return 0;
 			}
 
-	return f;
+	return 1;
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-	int f = 0;
 	if ((BitLen != bf.BitLen) || (MemLen != bf.MemLen))
-		f = 1;
+		return 1;
 	else
 		for (int i = 0; i < MemLen; i++)
 			if (pMem[i] != bf.pMem[i])
 			{
-				f = 1;
+				return 1;
 				break;
 			}
 
-	return f;
+	return 0;
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"

@@ -19,6 +19,9 @@ int main(int argc, char **argv) {
 	 bf1.all_elem_degree_of_number(2);
 	 cout << "-------------------------------\n";
 	 bf1.all_elem_multiple(2);
+	 cout << "----------------------------------\n";
+	 
+	 
 
 	 _getch();
 	 return 0;
