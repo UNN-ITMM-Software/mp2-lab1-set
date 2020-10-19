@@ -1,5 +1,5 @@
 #include "tset.h"
-
+#include <fstream>
 #include <gtest.h>
 
 TEST(TSet, can_get_max_power_set)
@@ -295,3 +295,60 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+//тесты на доп задания
+TEST(TSet, can_find_elems_mod_k)
+{
+  const int size = 10;
+  TSet set(size);
+  // set = {0, 3, 4, 8, 9}
+  set.InsElem(0);
+  set.InsElem(3);
+  set.InsElem(4);
+  set.InsElem(8);
+  set.InsElem(9);
+  string expS = "039";
+  string S = set.GetElemsModK(3);
+  EXPECT_EQ(expS, S);
+}
+
+TEST(TSet, can_change_elem)
+{
+  const int size = 10;
+  TSet set(size), expSet(size);
+  // set = {0, 3, 4, 8, 9}
+  set.InsElem(0);
+  set.InsElem(3);
+  set.InsElem(4);
+  set.InsElem(8);
+  set.InsElem(9);
+  // set = {0, 4, 7, 8, 9}
+  set.ChangeElem(3);
+  set.ChangeElem(7);
+  // expSet = {0, 4, 7, 8, 9}
+  expSet.InsElem(0);
+  expSet.InsElem(4);
+  expSet.InsElem(7);
+  expSet.InsElem(8);
+  expSet.InsElem(9);
+  EXPECT_EQ(expSet, set);
+}
+
+//TEST(TSet, can_write_set_to_file)
+//{
+//  const int size = 4;
+//  TSet set(size);
+//  // set = {0, 2, 3}
+//  set.InsElem(0);
+//  set.InsElem(2);
+//  set.InsElem(3);
+//  ofstream fout("output.txt");
+//  fout << set;
+//  fout.close();
+//  string expS = "{ 0, 2, 3 }";
+//  string S = "";
+//  ifstream fin("output.txt");
+//  fin >> S;
+//  fin.close();
+//  EXPECT_EQ(expS, S);
+//}
