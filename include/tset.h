@@ -42,7 +42,7 @@ public:
   // дополнительные задания
   string GetElemsModK(int k);
   void ChangeElem(int n);
-  friend ofstream& operator<<(ofstream& out, const TSet s);
+  friend ofstream& operator<<(ofstream& out, const TSet& s);
 
   friend istream& operator>>(istream& istr, TSet& bf);
   friend ostream& operator<<(ostream& ostr, const TSet& bf);

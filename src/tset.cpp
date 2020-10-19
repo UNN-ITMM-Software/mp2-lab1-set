@@ -152,7 +152,7 @@ void TSet::ChangeElem(int n)
     BitField.SetBit(n);
 }
 
-ofstream& operator<<(ofstream& out, const TSet s)
+ofstream& operator<<(ofstream& out, const TSet& s)
 {
   out << s;
   return out;
