@@ -3,7 +3,7 @@
 class TRatio
 {
  public:
-    TRatio(int num=0, int den=0);
+    TRatio(int num=1, int den=1);
     int GetNumerator();
     int GetDenominator();
 

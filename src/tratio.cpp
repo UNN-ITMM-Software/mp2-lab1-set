@@ -2,6 +2,9 @@
 
 TRatio::TRatio(int num, int den)
 {
+    if (den == 0)
+        throw "Denominator can't be zero!";
+
     numerator_ = num;
     denominator_ = den;
 }

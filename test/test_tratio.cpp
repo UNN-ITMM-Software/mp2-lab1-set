@@ -46,3 +46,27 @@ TEST(TRatio, can_get_denominator)
     // Assert
     EXPECT_EQ(3, r.GetDenominator());
 }
+
+TEST(TRatio, throws_on_zero_denominator)
+{
+    // Arrange & Act & Assert
+    ASSERT_ANY_THROW(TRatio r(1, 0));
+}
+
+TEST(TRatio, default_numerator_is_one)
+{
+    // Arrange & Act
+    TRatio r;
+
+    // Assert
+    EXPECT_EQ(1, r.GetNumerator());
+}
+
+TEST(TRatio, default_denominator_is_one)
+{
+    // Arrange & Act
+    TRatio r;
+
+    // Assert
+    EXPECT_EQ(1, r.GetDenominator());
+}
