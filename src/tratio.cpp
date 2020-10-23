@@ -26,7 +26,7 @@ int TRatio::GetDenominator()
     return denominator_;
 }
 
-int gcd(int a, int b)
+int TRatio::gcd(int a, int b)
 {
     while(b != 0)
     {

@@ -11,6 +11,5 @@ class TRatio
  private:
     int numerator_;
     int denominator_;
+    int gcd(int a, int b);
 };
-
-int gcd(int a, int b);
