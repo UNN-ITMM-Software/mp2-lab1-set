@@ -12,3 +12,5 @@ class TRatio
     int numerator_;
     int denominator_;
 };
+
+int gcd(int a, int b);

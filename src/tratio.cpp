@@ -5,14 +5,15 @@ TRatio::TRatio(int numerator, int denominator)
     if (denominator == 0)
         throw "Denominator can't be zero!";
 
-    if (denominator < 0)
-    {
-        numerator *= -1;
-        denominator *= -1;
-    }
+    int divisor = gcd(numerator, denominator);
+    numerator_ = numerator / divisor;
+    denominator_ = denominator / divisor;
 
-    numerator_ = numerator;
-    denominator_ = denominator;
+    if (denominator_ < 0)
+    {
+        numerator_ *= -1;
+        denominator_ *= -1;
+    }
 }
 
 int TRatio::GetNumerator()
@@ -23,4 +24,15 @@ int TRatio::GetNumerator()
 int TRatio::GetDenominator()
 {
     return denominator_;
+}
+
+int gcd(int a, int b)
+{
+    while(b != 0)
+    {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
 }

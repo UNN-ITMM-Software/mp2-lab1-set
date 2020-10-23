@@ -114,3 +114,64 @@ TEST(TRatio, sign_moves_to_numerator)
     EXPECT_EQ(-1, r.GetNumerator());
     EXPECT_EQ(3, r.GetDenominator());
 }
+
+TEST(TRatio, sign_moves_to_numerator_and_gcd_applied)
+{
+    // Arrange & Act
+    TRatio r(4, -16);
+
+    // Assert
+    EXPECT_EQ(-1, r.GetNumerator());
+    EXPECT_EQ(4, r.GetDenominator());
+}
+
+TEST(TRatio, sign_stays_in_numerator_and_gcd_applied)
+{
+    // Arrange & Act
+    TRatio r(-5, 10);
+
+    // Assert
+    EXPECT_EQ(-1, r.GetNumerator());
+    EXPECT_EQ(2, r.GetDenominator());
+}
+
+TEST(TRatio, ratio_divided_by_gcd)
+{
+    // Arrange & Act
+    TRatio r(2, 4);
+
+    // Assert
+    EXPECT_EQ(1, r.GetNumerator());
+    EXPECT_EQ(2, r.GetDenominator());
+}
+
+TEST(TRatio, gcd_1_1_1)
+{
+    // Arrange
+    int a = 1;
+    int b = 1;
+
+    // Assert
+    EXPECT_EQ(1, gcd(a, b));
+}
+
+TEST(TRatio, gcd_2_2_2)
+{
+    // Arrange
+    int a = 2;
+    int b = 2;
+
+    // Assert
+    EXPECT_EQ(2, gcd(a, b));
+}
+
+TEST(TRatio, gcd_6_3_3)
+{
+    // Arrange
+    int a = 6;
+    int b = 3;
+
+    // Assert
+    EXPECT_EQ(3, gcd(a, b));
+    EXPECT_EQ(3, gcd(b, a));
+}
