@@ -6,6 +6,7 @@
 // Множество - реализация через битовые поля
 
 #include "tset.h"
+#include <fstream>
 
 TSet::TSet(int mp) : MaxPower(mp), BitField(mp) {}
 
@@ -154,6 +155,18 @@ void TSet::ChangeElem(int n)
 
 ofstream& operator<<(ofstream& out, const TSet& s)
 {
-  out << s;
+  int i;
+  out << "{";
+  for (i = 0; i < s.MaxPower; i++)
+    if (s.IsMember(i))
+    {
+      out << "" << i;
+      break;
+    }
+  i++;
+  for (i; i < s.MaxPower; i++)
+    if (s.IsMember(i))
+      out << ", " << i;
+  out << "}";
   return out;
 }
