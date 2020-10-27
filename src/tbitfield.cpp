@@ -8,6 +8,10 @@
 #include "tbitfield.h"
 #include <cmath>
 
+// Fake variables used as placeholders in tests
+static const int FAKE_INT = -1;
+static TBitField FAKE_BITFIELD(1);
+
 TBitField::TBitField(int len)
 {
   if (len > 0)
@@ -72,7 +76,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 
 int TBitField::GetLength(void) const // получить длину (к-во битов)
 {
-  return BitLen;
+  return BitLen
 }
 
 void TBitField::SetBit(const int n) // установить бит
@@ -191,10 +195,6 @@ TBitField TBitField::operator~(void) // отрицание
   return temp;
 }
 
-// ввод/вывод
-//Формат данных - последовательность из 0 и 1 без пробелов
-//Начальные пробелы игнорируются
-//Если не получены 0 или 1, то ввод завершается
 
 istream& operator>>(istream& istr, TBitField& bf) // ввод
 {
@@ -226,3 +226,4 @@ ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
       ostr << '0';
   return ostr;
 }
+    
