@@ -11,6 +11,7 @@ before_script:
 script:
   - cmake ../mp2-lab1-set
   - make -j
-  - ./bin/test_set --gtest_list_tests
+  - cd ./bin/
+  - ./test_set
 notifications:
   email: false
