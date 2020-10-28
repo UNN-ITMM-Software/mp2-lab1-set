@@ -9,6 +9,7 @@
 #define __BITFIELD_H__
 
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -43,9 +44,15 @@ public:
   TBitField  operator&(const TBitField &bf); // операция "и"              (#Л2)
   TBitField  operator~(void);                // отрицание                  (#С)
 
+  friend ifstream &operator>>(ifstream &ifstr, TBitField &bf);    //Файловый ввод
+  friend ofstream &operator<<(ofstream &ofstr, TBitField &bf);	//Файловый вывод
+
   friend istream &operator>>(istream &istr, TBitField &bf);       //      (#О7)
   friend ostream &operator<<(ostream &ostr, const TBitField &bf); //
   
+  friend void sqr(int n);
+  friend void mod14(int);
+
 };
 // Структура хранения битового поля
 //   бит.поле - набор битов с номерами от 0 до BitLen

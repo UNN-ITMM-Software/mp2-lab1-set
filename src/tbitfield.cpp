@@ -219,3 +219,52 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 		else ostr << '0';
 	return ostr;
 }
+
+ifstream &operator>>(ifstream &ifstr, TBitField &bf)
+{
+	ifstr.open("in_and_out.txt", ios_base::in);
+
+	int i = 0;
+	char c;
+
+	ifstr >> c;
+	while (c != ' ') {
+		ifstr >> c;
+	}
+
+	while (1)
+	{
+		ifstr >> c;
+		if (c == '0') bf.ClrBit(i++);
+		else
+			if (c == '1') bf.SetBit(i++);
+			else
+				break;
+	return ifstr;
+}
+
+ofstream &operator<<(ofstream &ofstr, TBitField &bf)
+{
+	ofstr.open("in and out.txt", ios_base::out);
+
+	int l = bf.GetLength();
+	for (int i = 0; i < l; i++)
+		if (bf.GetBit(i)) ofstr << '1';
+		else ofstr << '0';
+
+
+
+	return ofstr;
+}
+
+friend void sqr(int n)
+{
+	pMem[GetMemIndex(n)] *= pMem[GetMemIndex(n)];
+}
+
+friend void mod14(int)
+{
+	for (int i = 0; i < MemLen; i++)
+		if (pMem[i] % 14 == 0)
+			cout << pMem[i];
+}
