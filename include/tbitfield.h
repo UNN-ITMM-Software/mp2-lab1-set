@@ -30,6 +30,7 @@ public:
   ~TBitField();                      //                                    (#С)
 
   // доступ к битам
+  int GetMemLen(void) const;
   int GetLength(void) const;      // получить длину (к-во битов)           (#О)
   void SetBit(const int n);       // установить бит                       (#О4)
   void ClrBit(const int n);       // очистить бит                         (#П2)
