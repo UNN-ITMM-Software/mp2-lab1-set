@@ -2,6 +2,8 @@
 
 #include "tset.h"
 
+using namespace std;
+
 TSet::TSet(int mp) : BitField(mp)
 {
 	MaxPower = mp;

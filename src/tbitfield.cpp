@@ -2,6 +2,8 @@
 
 #include "tbitfield.h"
 
+using namespace std;
+
 TBitField::TBitField(int len)
 {
 	if (len < 0)
