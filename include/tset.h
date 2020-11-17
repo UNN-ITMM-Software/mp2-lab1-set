@@ -38,8 +38,9 @@ public:
 	friend ostream& operator<<(ostream& ostr, const TSet& bf);
 
 	TSet  multiples_of_k(const int k) const;		// выводит элем. кратные k (Доп. задание №1)
-	TSet change_item();	// изменить элемент (Доп. задание №3)
-	void save_to_file() const; //Доп. задание №2
-	TSet read_from_file(); //Доп. задание №2
+	void change_item();	// изменить элемент (Доп. задание №3)
+	void change_item_for_gtests(const int number, const int value);
+	void save_to_file() const; //Доп. задание №2 запись
+	TSet read_from_file(); //Доп. задание №2 чтение
 };
 #endif

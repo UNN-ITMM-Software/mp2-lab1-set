@@ -1,5 +1,4 @@
 #include "tset.h"
-
 #include <gtest.h>
 
 TEST(TSet, can_get_max_power_set)
@@ -294,4 +293,81 @@ TEST(TSet, check_negation_operator)
   expSet.InsElem(2);
 
   EXPECT_EQ(expSet, set1);
+}
+
+TEST(TSet, multiples_of_k)
+{
+	const int size = 10;
+	TSet set1(size), set2(size), set3(size);
+	//set1 = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+	set1.InsElem(1);
+	set1.InsElem(2);
+	set1.InsElem(3);
+	set1.InsElem(4);
+	set1.InsElem(5);
+	set1.InsElem(6);
+	set1.InsElem(7);
+	set1.InsElem(8);
+	set1.InsElem(9);
+	set2 = set1.multiples_of_k(2);
+	//set3 = {2, 4, 6, 8}
+	set3.InsElem(2);
+	set3.InsElem(4);
+	set3.InsElem(6);
+	set3.InsElem(8);
+	EXPECT_EQ(set3, set2);
+}
+
+TEST(TSet, write_in_file)
+{
+	const int size = 5;
+	TSet setWR(size);
+	//set1 = {1, 2, 3, 4}
+	setWR.InsElem(1);
+	setWR.InsElem(2);
+	setWR.InsElem(3);
+	setWR.InsElem(4);
+	setWR.save_to_file();
+	EXPECT_NO_THROW();
+}
+
+TEST(TSet, read_from_file)
+{
+	const int size = 5;
+	TSet setWR(size);
+	//set1 = {1, 2, 3, 4}
+	setWR.InsElem(1);
+	setWR.InsElem(2);
+	setWR.InsElem(3);
+	setWR.InsElem(4);
+	TSet setRE(size);
+	setRE = setWR.read_from_file();
+	EXPECT_EQ(true, setWR == setRE);
+}
+
+TEST(TSet, change_item)
+{
+	const int size = 6;
+	TSet set1(size), set2(size), set3(size);
+	set1.InsElem(1);
+	set1.InsElem(2);
+	set1.InsElem(3);
+	set1.InsElem(4);	
+	set1.change_item_for_gtests(3,5);;
+	set2.InsElem(1);
+	set2.InsElem(2);
+	set2.InsElem(5);
+	set2.InsElem(4);
+	EXPECT_EQ(true, set1 == set2);
+}
+
+TEST(TSet, change_item_throw)
+{
+	const int size = 6;
+	TSet set1(size);
+	set1.InsElem(1);
+	set1.InsElem(2);
+	set1.InsElem(3);
+	set1.InsElem(4);
+	EXPECT_ANY_THROW(set1.change_item_for_gtests(10, 5););
 }

@@ -86,7 +86,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 	if (n < 0 || n > BitLen)
 		throw exception("Error: Negative index bit.");
 	i = GetMemIndex(n);		// определяем номер октета.
-	mask = GetMemMask(n);	// получение маски.
+	mask = GetMemMask(n);	// получение маски
 	temp = pMem[i] & mask;
 	if (temp != 0)
 		return (1);

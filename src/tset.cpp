@@ -129,12 +129,11 @@ TSet TSet::multiples_of_k(const int k) const // получить элемент�
 }
 
 
-void TSet::save_to_file() const // Доп. задание №2
+void TSet::save_to_file() const // Доп. задание №2 запись
 {
-	string fileName;
+	string fileName = "BitFieldO.txt";
 
-	cout << "Enter file name." << endl;
-	cin >> fileName;
+	
 	ofstream output(fileName);
 	if (!output)
 	{
@@ -146,16 +145,15 @@ void TSet::save_to_file() const // Доп. задание №2
 	output.close();
 }
 
-TSet TSet::read_from_file() //Доп. задание №2
+TSet TSet::read_from_file() //Доп. задание №2 чтение
 {
-	string	fileName;
+	string	fileName = "BitFieldI.txt";
 	string	line;
 	int		MaxPower;
 
-	cout << "Enter the name of the file to read." << endl;
-	cin >> fileName;
+	
 	ifstream input(fileName);
-	if (input)
+	if (!input)
 	{
 		cout << "Error open file " << fileName << endl;
 		return (TSet(0));
@@ -164,28 +162,37 @@ TSet TSet::read_from_file() //Доп. задание №2
 	input.ignore();
 	TSet newSet(MaxPower);
 	getline(input, line);
-	cout << "line = " << line << endl;
 	istringstream istrim(line);
 	for (int num; istrim >> num; cout << num << endl)
 		newSet.InsElem(num);
 	input.close();
 	return (newSet);
 }
-
-TSet TSet::change_item() //Доп. задание №3
+void TSet::change_item() //Доп. задание №3
 {
 	int number;
 	int	value;
 
 	cout << "Enter the number of the item to change." << endl;
 	cin >> number;
-	if (BitField.GetBit(number))
+	if (!(BitField.GetBit(number)))
 	{
 		cout << "No item under the number " << number << endl;
-		return (TSet(0));
+		return;
 	}
 	cout << "Enter a new value." << endl;
 	cin >> value;
 	InsElem(value);
-	return (TSet(0));
+	
+}
+
+void TSet::change_item_for_gtests(const int number, const int value)// Доп. задание №3 специально для google test
+{
+	if (!(BitField.GetBit(number)))
+	{
+		cout << "No item under the number " << number << endl;
+		return;
+	}
+	BitField.ClrBit(number);
+	this->InsElem(value);
 }

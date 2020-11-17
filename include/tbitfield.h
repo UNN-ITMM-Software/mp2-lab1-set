@@ -40,7 +40,7 @@ public:
 	TBitField& operator=(const TBitField& bf); // присваивание              
 	TBitField  operator|(const TBitField& bf); // операция "или"            
 	TBitField  operator&(const TBitField& bf); // операция "и"              
-	TBitField  operator~(void);                // отрицание                  
+	TBitField  operator~(void);                // операция отрицания                  
 
 	friend istream& operator>>(istream& istr, TBitField& bf);       
 	friend ostream& operator<<(ostream& ostr, const TBitField& bf);   
