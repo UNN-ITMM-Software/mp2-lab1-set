@@ -139,28 +139,25 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-	if (bf.BitLen > (*this).BitLen) (*this).BitLen = bf.BitLen;
-	if ((this->MemLen) < bf.MemLen)
+	TBitField res(*this);
+	int l;
+	if (res.Bitlen < bf.Bitlen)
+		res.Bitlen = bf.Bitlen;
+	l = res.GetLength();
+	if (res.Memlen < bf.Memlen)
 	{
-		TELEM* ptr = (this->pMem);
-		pMem = new TELEM[bf.MemLen];
-		for (int i = 0; i < MemLen; i++)
-		{
-			pMem[i] = ptr[i];
-		}
-		for (int i = MemLen; i < bf.MemLen; i++)
-		{
-			pMem[i] = 0;
-		}
-		delete[]ptr;
-		MemLen = bf.MemLen;
-
+		TELEM* temp = (res.pMem);
+		res.Memlen = bf.Memlen;
+		res.pMem = new TELEM[bf.Memlen];
+		res.pMem = 0;
+		res.pMem = temp;
+		delete[]temp;
+		for (int i = 0; i < res.Memlen; i++)
+			res.Memlen[i] = res.pMem[i] | bf.pMem[i];
 	}
-	for (int i = 0; i < bf.GetMemLen(); i++)
-	{
-		(*this).pMem[i] = (*this).pMem[i] | bf.pMem[i];
-	}
-	return (*this);
+for (int i = 0; i < res.Memlen; i++)
+	res.pMem[i] = res.pMem[i] | bf.pMem[i];
+return res;
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
