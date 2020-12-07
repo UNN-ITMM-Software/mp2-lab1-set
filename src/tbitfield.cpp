@@ -156,15 +156,9 @@ TBitField TBitField::operator|(const TBitField& bf) // операция "или"
 	if (this->MemLen < bf.MemLen)
 	{
 		TBitField res(bf);
-		//TELEM* temp = (res.pMem);
-		//res.MemLen = bf.MemLen;
-		//res.pMem = new TELEM[bf.MemLen];
-		//res.pMem = 0;
 		res.pMem = this->pMem;
-		//delete[]temp;
 	}
 	TBitField res(*this);
-	int l;
 	if (res.BitLen < bf.BitLen)
 		res.BitLen = bf.BitLen;
 	for (int i = 0; i < res.MemLen; i++)
