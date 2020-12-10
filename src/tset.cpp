@@ -188,37 +188,3 @@ void TSet::changeElem(const int Elem, const int n)
         DelElem(Elem);
     }
 }
-    return FAKE_SET;
-}
-
-TSet TSet::operator+(const int Elem) // объединение с элементом
-{
-    return FAKE_SET;
-}
-
-TSet TSet::operator-(const int Elem) // разность с элементом
-{
-    return FAKE_SET;
-}
-
-TSet TSet::operator*(const TSet &s) // пересечение
-{
-    return FAKE_SET;
-}
-
-TSet TSet::operator~(void) // дополнение
-{
-    return FAKE_SET;
-}
-
-// перегрузка ввода/вывода
-
-istream &operator>>(istream &istr, TSet &s) // ввод
-{
-    return istr;
-}
-
-ostream& operator<<(ostream &ostr, const TSet &s) // вывод
-{
-    return ostr;
-}
