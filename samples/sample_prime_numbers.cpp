@@ -13,7 +13,7 @@
 #ifndef USE_SET // Использовать класс TBitField
 
 #include "tbitfield.h"
-
+#include "tset.h"
 int main()
 {
   int n, m, k, count;
@@ -37,6 +37,7 @@ int main()
   // оставшиеся в s элементы - простые числа
   cout << endl << "Печать множества некратных чисел" << endl << s << endl;
   cout << endl << "Печать простых чисел" << endl;
+
   count = 0;
   k = 1;
   for (m = 2; m <= n; m++)

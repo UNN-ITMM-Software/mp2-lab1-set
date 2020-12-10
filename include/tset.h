@@ -9,6 +9,7 @@
 #define __SET_H__
 
 #include "tbitfield.h"
+#include <fstream>
 
 class TSet
 {
@@ -37,7 +38,11 @@ public:
   TSet operator* (const TSet &s);  // пересечение
   TSet operator~ (void);           // дополнение
 
+  TSet dividedByK(const int k);
+  void changeElem(const int Elem, const int n);
   friend istream &operator>>(istream &istr, TSet &bf);
   friend ostream &operator<<(ostream &ostr, const TSet &bf);
+  friend ifstream& operator>>(ifstream& istr, TSet& bf);
+  friend ofstream& operator<<(ofstream& ofstr, TSet& bf);
 };
 #endif
