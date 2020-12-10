@@ -295,3 +295,41 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, check_divided_by_k) {
+	const int size = 10;
+	TSet set(size), res(size), expRes(size);
+	set.InsElem(0);
+	set.InsElem(1);
+	set.InsElem(4);
+	set.InsElem(6);
+
+	expRes.InsElem(0);
+	expRes.InsElem(4);
+	expRes.InsElem(6);
+
+	res = set.dividedByK(2);
+
+	EXPECT_EQ(res, expRes);
+}
+
+TEST(TSet, can_work_with_files) {
+	const int size = 11;
+	TSet s1(size), s2(size);
+	s1.InsElem(0);
+	s1.InsElem(4);
+	s1.InsElem(7);
+	s1.InsElem(10);
+
+	ofstream f1;
+	f1.open("test.txt");
+	f1 << s1;
+	f1.close();
+
+	ifstream f2;
+	f2.open("test.txt");
+	f2 >> s2;
+	f2.close();
+
+	EXPECT_EQ(s1, s2);
+} 

@@ -1,4 +1,4 @@
-// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
+﻿// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
 //
 // tset.h - Copyright (c) Гергель В.П. 07.05.2001
 //   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
@@ -9,7 +9,7 @@
 #define __SET_H__
 
 #include "tbitfield.h"
-
+#include <fstream>
 class TSet
 {
 private:
@@ -37,7 +37,11 @@ public:
   TSet operator* (const TSet &s);  // пересечение
   TSet operator~ (void);           // дополнение
 
+  TSet dividedByK(const int k);
+  void changeElem(const int Elem, const int n);
   friend istream &operator>>(istream &istr, TSet &bf);
   friend ostream &operator<<(ostream &ostr, const TSet &bf);
+  friend ifstream& operator>>(ifstream& istr, TSet& bf);
+  friend ofstream& operator<<(ofstream& ofstr, TSet& bf);
 };
 #endif
