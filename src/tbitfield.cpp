@@ -7,6 +7,10 @@
 
 #include "tbitfield.h"
 
+// Fake variables used as placeholders in tests
+static const int FAKE_INT = -1;
+static TBitField FAKE_BITFIELD(1);
+
 TBitField::TBitField(int len)
 {
 	if (len >= 0) {
