@@ -298,6 +298,7 @@ TEST(TSet, check_negation_operator)
 }
 
 //тесты на доп задания
+
 TEST(TSet, can_find_elems_mod_k)
 {
   const int size = 10;
@@ -343,9 +344,7 @@ TEST(TSet, can_write_set_to_file)
   set.InsElem(0);
   set.InsElem(2);
   set.InsElem(3);
-  ofstream fout("output.txt");
-  fout << set;
-  fout.close();
+  set.WriteToFile("output.txt");
   string expS = "{0, 2, 3}";
   string S = "";
   ifstream fin("output.txt");

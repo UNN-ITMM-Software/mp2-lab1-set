@@ -42,6 +42,7 @@ public:
   // дополнительные задания
   string GetElemsModK(int k);
   void ChangeElem(int n);
+  void WriteToFile(string name);
   friend ofstream& operator<<(ofstream& out, const TSet& s);
 
   friend istream& operator>>(istream& istr, TSet& bf);

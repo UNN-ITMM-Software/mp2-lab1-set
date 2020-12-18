@@ -153,6 +153,13 @@ void TSet::ChangeElem(int n)
     BitField.SetBit(n);
 }
 
+void TSet::WriteToFile(string name)
+{
+  ofstream fout(name.c_str());
+  fout << *this;
+  fout.close();
+}
+
 ofstream& operator<<(ofstream& out, const TSet& s)
 {
   int i;
