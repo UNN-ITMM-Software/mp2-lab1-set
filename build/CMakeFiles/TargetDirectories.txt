@@ -1,0 +1,6 @@
+C:/Users/solda/Desktop/KAKNIBUD/mp2-lab1-set/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/solda/Desktop/KAKNIBUD/mp2-lab1-set/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/solda/Desktop/KAKNIBUD/mp2-lab1-set/build/src/CMakeFiles/set.dir
+C:/Users/solda/Desktop/KAKNIBUD/mp2-lab1-set/build/samples/CMakeFiles/sample_prime_numbers.dir
+C:/Users/solda/Desktop/KAKNIBUD/mp2-lab1-set/build/gtest/CMakeFiles/gtest.dir
+C:/Users/solda/Desktop/KAKNIBUD/mp2-lab1-set/build/test/CMakeFiles/test_set.dir
