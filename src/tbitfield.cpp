@@ -7,6 +7,10 @@
 
 #include "tbitfield.h"
 
+// Fake variables used as placeholders in tests
+static const int FAKE_INT = -1;
+static TBitField FAKE_BITFIELD(1);
+
 TBitField::TBitField(int len)
 {
   if (len > 0) {
@@ -36,6 +40,7 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
+
   if (n >= 0 && n < BitLen)
     return n / 32;
   else
@@ -44,10 +49,12 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
+
   if (n >= 0 && n < BitLen)
     return TELEM(1) << (n % 32);
   else
     throw 3;
+
 }
 
 // доступ к битам битового поля
