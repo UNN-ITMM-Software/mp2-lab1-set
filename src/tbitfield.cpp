@@ -15,7 +15,7 @@ TBitField::TBitField(int len)
 {
 	if (len < 1)
 	{
-		throw "Incorrect length";
+		throw -1;
 	}
 
 	BitLen = len;
@@ -50,14 +50,13 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-	int size = (sizeof(TELEM) * 8);
-	int pos = n / size;
+	int pos = n / (sizeof(TELEM) * 8);
 	return pos;
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-	int k = n - sizeof(TELEM)*GetMemIndex(n);
+	int k = n % (sizeof(TELEM)*GetMemIndex(n));
 	return 1 << k;
 }
 
