@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -rdynamic CMakeFiles/sample_prime_numbers.dir/sample_prime_numbers.cpp.o -o ../bin/sample_prime_numbers  ../lib/libset.a 
