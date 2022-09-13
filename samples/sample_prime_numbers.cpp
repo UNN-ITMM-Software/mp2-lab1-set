@@ -4,12 +4,9 @@
 //   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
 //
 // Тестирование битового поля и множества
-
 #include <iomanip>
-
 // #define USE_SET // Использовать класс TSet,
                 // закоментировать, чтобы использовать битовое поле
-
 #ifndef USE_SET // Использовать класс TBitField
 
 #include "tbitfield.h"
