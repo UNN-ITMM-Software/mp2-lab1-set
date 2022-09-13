@@ -13,6 +13,7 @@ static TBitField FAKE_BITFIELD(1);
 
 TBitField::TBitField(int len)
 {
+
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -25,7 +26,7 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-    return FAKE_INT;
+    return 233;
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
