@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -rdynamic CMakeFiles/test_set.dir/test_main.cpp.o CMakeFiles/test_set.dir/test_tbitfield.cpp.o CMakeFiles/test_set.dir/test_tset.cpp.o -o ../bin/test_set  ../lib/libgtest.a ../lib/libset.a -pthread 
