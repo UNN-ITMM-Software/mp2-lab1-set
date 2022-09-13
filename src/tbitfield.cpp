@@ -13,6 +13,7 @@ static TBitField FAKE_BITFIELD(1);
 
 TBitField::TBitField(int len)
 {
+    this->MemLen = len;
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
