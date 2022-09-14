@@ -6,6 +6,7 @@
 // Битовое поле
 
 #ifndef __BITFIELD_H__
+
 #define __BITFIELD_H__
 
 #include <iostream>
