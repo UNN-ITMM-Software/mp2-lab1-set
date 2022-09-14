@@ -105,7 +105,8 @@ TEST(TBitField, can_assign_bitfields_of_equal_size)
   {
     bf1.SetBit(i);
   }
-  bf2 = bf1;
+  bf2 = bf1;//fdf
+
 
   EXPECT_NE(0, bf2.GetBit(0));
   EXPECT_NE(0, bf2.GetBit(1));
