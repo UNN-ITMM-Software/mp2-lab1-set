@@ -1,0 +1,8 @@
+[report]
+omit =
+    */python?.?/*
+    */site-packages/nose/*
+    */numpy/*
+[run]
+ls
+data_file = tmp/coverage_report
