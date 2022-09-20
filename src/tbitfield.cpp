@@ -13,44 +13,114 @@ static TBitField FAKE_BITFIELD(1);
 
 TBitField::TBitField(int len)
 {
+    if (len <= 0) {
+        throw "init error";
+    }
+    else {
+        BitLen = sizeof(int) * 8 * len;
+        MemLen = len;
+        pMem = new TELEM[MemLen];
+        for (int i = 0; i < len; i++) {
+            pMem[i] = 0;
+        }
+    }
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
 {
+    BitLen = bf.BitLen;
+    MemLen = bf.MemLen;
+    pMem = new TELEM[MemLen];
+    for (int i = 0; i < MemLen; i++) {
+        pMem[i] = bf.pMem[i];
+    }
 }
 
 TBitField::~TBitField()
 {
+    if (pMem != nullptr)
+    {
+        delete[] pMem;
+        BitLen = 0;
+        MemLen = 0;
+        pMem = nullptr;
+    }
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-    return FAKE_INT;
+    if ((n >= 0) && (n < BitLen))
+    {
+        return n >> 5;
+    }
+    else
+    {
+        throw "Get MemIndex Error";
+    }
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-    return FAKE_INT;
+    if ((n >= 0) && (n < BitLen))
+    {
+        return 1 << (n & (sizeof(int) * 8 - 1));
+    }
+    else
+    {
+        throw "error";
+    }
 }
 
 // доступ к битам битового поля
 
 int TBitField::GetLength(void) const // получить длину (к-во битов)
 {
-  return FAKE_INT;
+  return MemLen;
 }
 
 void TBitField::SetBit(const int n) // установить бит
 {
+    if ((n >= 0) && (n < BitLen))
+    {
+        int i = GetMemIndex(n);
+
+        int m = GetMemMask(n);
+
+        pMem[i] = pMem[i] | m;
+    }
+    else
+    {
+        throw "error index";
+    }
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
+    if ((n >= 0) && (n < BitLen))
+    {
+        int i = GetMemIndex(n);
+
+        int m = GetMemMask(n);
+
+        pMem[i] = pMem[i] & ~m;
+    }
+    else
+    {
+        throw "error index";
+    }
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
-  return FAKE_INT;
+    if ((n >= 0) && (n < BitLen))
+    {
+        int i = GetMemIndex(n);
+        int m = GetMemMask(n);
+        return (pMem[i] & m) == 0 ? 0 : 1;
+    }
+    else {
+        throw "Error GetBit";
+    }
 }
 
 // битовые операции
