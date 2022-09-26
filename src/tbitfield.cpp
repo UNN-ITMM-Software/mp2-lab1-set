@@ -108,7 +108,7 @@ void TBitField::ClrBit(const int n) // очистить бит
   }
   else
   {
-    throw "error index";
+    throw "Error index";
   }
 }
 
@@ -170,32 +170,68 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-  return FAKE_INT;
+  if (MemLen != bf.MemLen)
+  {
+    return true;
+  }
+  else
+  {
+    for (int i = 0; i<MemLen; i++)
+    {
+      if (pMem[i] != bf.pMem[i])
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-    return FAKE_BITFIELD;
+  if (MemLen == bf.MemLen)
+  {
+    for (int i = 0; i<MemLen; i++)
+    {
+      pMem[i] = pMem[i] | bf.pMem[i];
+    }
+  }
+  else
+  {
+    throw "Error lenght"
+  }
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-    return FAKE_BITFIELD;
+  if (MemLen == bf.MemLen)
+  {
+    for (int i = 0; i<MemLen; i++)
+    {
+      pMem[i] = pMem[i] & bf.pMem[i];
+    }
+   else
+   {
+     throw "Eror lenght"
+   }
 }
 
 TBitField TBitField::operator~(void) // отрицание
 {
-    return FAKE_BITFIELD;
+  for (int i = 0; i<MemLen; i++)
+  {
+    pMem[i] = ~pMem[i]; 
+  }
 }
 
 // ввод/вывод
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-    return istr;
+  return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
-    return ostr;
+  return ostr<<bf.Mem;
 }
