@@ -7,7 +7,6 @@
 
 #include "tset.h"
 
-// Fake variables used as placeholders in tests
 static const int FAKE_INT = -1;
 static TBitField FAKE_BITFIELD(1);
 static TSet FAKE_SET(1);
