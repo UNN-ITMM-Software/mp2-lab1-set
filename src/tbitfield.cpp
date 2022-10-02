@@ -197,25 +197,25 @@ TBitField TBitField::operator~(void) // отрицание
   }
 }
 
-// ввод/вывод
-
 istream& operator>>(istream& istr, TBitField& bf) // ввод
 {
-  int temp;
-  for (int i = 0; i < bf.GetLength(); i++)
-  {
-	cin >> temp;
-	if (temp == 1)
-	  bf.SetBit(i);
-	else if (temp == 0)
-	  bf.ClrBit(i);
-  }
-  return istr;
+    char* s;
+    istr >> s;
+    int len = sizeof(s) / sizeof(char) - 1;
+    TBitField tmp(len);
+    for (int i = 0; i < len; ++i)
+    {
+        if (s[i] == '1')
+            tmp.SetBit(i);
+        else
+            tmp.ClrBit(i);
+    }
+    return istr;
 }
 
 ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
 {
-  for (int i = 0; i < bf.GetLength(); i++)
-	ostr << bf.GetBit(i);
-  return ostr;
+    for (int i = 0; i < bf.GetLength(); i++)
+        ostr << bf.GetBit(i);
+    return ostr;
 }
