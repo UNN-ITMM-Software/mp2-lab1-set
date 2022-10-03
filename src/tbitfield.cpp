@@ -64,7 +64,7 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-  if ((n >= 0) && (n <= BitLen))
+  if ((n >= 0) && (n < MemLen))
   {
     return n >> 5;
   }
@@ -77,7 +77,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-  if ((n >= 0) && (n <= BitLen))
+  if ((n >= 0) && (n < MemLen))
   {
     return 1 << (n % 32);
   }
@@ -97,7 +97,7 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-  if ((n >= 0) && (n <= BitLen))
+  if ((n >= 0) && (n < MemLen))
   {
     int i = GetMemIndex(n);
 
@@ -113,7 +113,7 @@ void TBitField::SetBit(const int n) // установить бит
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
-  if ((n >= 0) && (n <= BitLen))
+  if ((n >= 0) && (n < MemLen))
   {
     int i = GetMemIndex(n);
 
@@ -129,7 +129,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
-  if ((n >= 0) && (n <= BitLen))
+  if ((n >= 0) && (n < MemLen))
   {
     int i = GetMemIndex(n);
 
@@ -146,31 +146,38 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 // битовые операции
 
-TBitField& TBitField::operator=(const TBitField &bf) // присваивание
+TBitField& TBitField::operator=(const TBitField& bf) // присваивание
 {
-  TBitField a(bf);
-
-  swap(*this, a);
-  
-  return *this;
+  if (this == &bf)
+    return (*this);
+  else
+  {
+    delete[] pMem;
+    MemLen = bf.MemLen;
+    pMem = new TELEM[MemLen];
+    BitLen = bf.BitLen;
+    for (int i = 0; i < MemLen; i++)
+    {
+      pMem[i] = bf.pMem[i];
+    }
+    return *this;
+  }
 }
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-  if (bf.MemLen != MemLen)
-    return false;
+  if (MemLen != bf.MemLen || BitLen != bf.BitLen)
+  {
+    return 0;
+  }
   else
   {
-    int f = 0;
     for (int i = 0; i < MemLen; i++)
     {
-      if (pMem[i] != bf.pMem[1])
-        f = 1;
+      if (pMem[i] != bf.pMem[i])
+        return 0;
     }
-    if (f == 1)
-      return false;
-    else
-      return true;
+    return 1;
   }
 }
 
