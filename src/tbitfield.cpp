@@ -36,7 +36,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 
     pMem = new TELEM[MemLen];
 
-    for (int i; i < MemLen; i++) {
+    for (int i = 0; i < MemLen; i++) {
 
         pMem[i] = bf.pMem[i];
     }
@@ -264,6 +264,23 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 
 TBitField TBitField::operator~(void) // отрицание
 {
+    // 0010 -> 1101   ~ - инвертирует
+
+    TBitField a(BitLen);
+
+    for (int i = 0; i < MemLen; i++) {
+
+        a.pMem[i] = ~pMem[i];
+    }
+
+    *this = a;
+
+    int lastNumBit = BitLen - (MemLen - 1) * (sizeof(TELEM) * 8);
+    if (lastNumBit < sizeof(TELEM) * 8) {
+        int mask = (1 << (lastNumBit)) - 1;
+        a.pMem[MemLen - 1] &= mask;
+    }
+    return a;
     
 }
 
@@ -271,10 +288,37 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
+    int size;
+
+    istr >> size;
+
+    TBitField a(size);
+     
+
+    int numberPos = 0;
+
+    for (int i = 0; i < size; i++) {
+
+        istr >> numberPos;
+
+        if (numberPos) {
+
+            a.SetBit(i);
+        }
+    }
+
+    bf = a;
+
     return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
+
+    ostr << "Our Arr: " << "\n";
+
+    for (int i = 0; i < bf.BitLen; i++) {
+        ostr << bf.pMem[i] << " ";
+    }
     return ostr;
 }
