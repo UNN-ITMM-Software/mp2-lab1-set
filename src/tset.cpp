@@ -127,50 +127,15 @@ TSet TSet::operator+(const TSet &s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-    int maxM = 0;
-
-    if (MaxPower >= Elem) {
-        maxM = MaxPower;
-    }
-    else {
-        maxM = Elem;
-    }
-
-    TSet a(maxM);
-
-    
-    a.BitField = BitField | a.BitField;
-    a.BitField.SetBit(Elem);
-    /*if (a.BitField.GetBit(Elem) == 0) {
-
-        a.BitField.SetBit(Elem);
-    }*/
-
+    TSet a(BitField);
+    a.InsElem(Elem);
     return a;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-
-    int maxM = 0;
-
-    if (MaxPower >= Elem) {
-        maxM = MaxPower;
-    }
-    else {
-        maxM = Elem;
-    }
-
-    TSet a(maxM);
-
-    a.BitField = BitField | a.BitField;
-
-    if (a.BitField.GetBit(Elem) != 0) {
-
-        a.BitField.ClrBit(Elem);
-
-    }
-
+    TSet a(BitField);
+    a.DelElem(Elem);
     return a;
 }
 
