@@ -144,35 +144,6 @@ int TBitField::operator!=(const TBitField& bf) const // сравнение
     return 1;
 }
 
-//TBitField TBitField::operator|(const TBitField &bf) // операция "или"
-//{
-//    if (BitLen != bf.BitLen)
-//    {
-//        throw "Different lengts";
-//    }
-//    TBitField bf1(*this);
-//    for (int i = 0; i < MemLen; i++)
-//    {
-//        bf1.pMem[i] |= bf.pMem[i];
-//    }
-//    return bf1;
-//}
-//
-//TBitField TBitField::operator&(const TBitField& bf) // операция "и"
-//{
-//    if (BitLen != bf.BitLen)
-//    {
-//        throw "Different lengts";
-//    }
-//    TBitField bf1(*this);
-//    for (int i = 0; i < MemLen; i++)
-//    {
-//        bf1.pMem[i] &= bf.pMem[i];
-//    }
-//    return bf1;
-//}
-
-
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
     TBitField bf1(0);
@@ -201,7 +172,6 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
     }
     return bf1;
 }
-
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
