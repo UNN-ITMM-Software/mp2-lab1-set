@@ -61,7 +61,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-    return 1<<n;
+    return 1<<(n%(sizeof(TELEM) * 8));
 }
 
 // доступ к битам битового поля
@@ -236,11 +236,14 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 }
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
-    ostr << bf.BitLen;
-    ostr << bf.MemLen;
+    ostr << bf.BitLen << " ";
+    ostr << bf.MemLen << " ";
     for (int i = 0; i < bf.BitLen; i++)
     {
-        ostr << bf.GetBit(i);
+        if (bf.GetBit(i) != 0)
+            ostr << "1";
+        else
+            ostr << "0";
     }
     return ostr;
 }
