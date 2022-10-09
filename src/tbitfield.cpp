@@ -198,7 +198,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
   }
   else
   {
-    throw "Error lenght"
+    throw "Error lenght";
   }
 }
 
@@ -228,10 +228,22 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
+  int tmp;
+  for (int i = 0; i < bf.GetLength(); i++)
+  {
+    cin >> tmp;
+    if (tmp == 1)
+      bf.SetBit(i);
+    else
+      if (tmp == 0)
+        bf.ClrBit(i);
+  }
   return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
-  return ostr<<bf.Mem;
+  for (int i = 0; i < bf.GetLength(); i++)
+    ostr << bf.GetBit(i);
+  return ostr;
 }
