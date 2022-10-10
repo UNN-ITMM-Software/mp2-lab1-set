@@ -1,0 +1,2 @@
+C:\Users\79960\OneDrive\Изображения\Документы\Git2\mp2-lab1-set\sln\vc10\Debug\gtest.pdb
+C:\Users\79960\OneDrive\Изображения\Документы\Git2\mp2-lab1-set\sln\vc10\gtest\Debug\gtest.pdb

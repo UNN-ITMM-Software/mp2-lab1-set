@@ -1,20 +1,11 @@
 # Методы программирования 2: Множества на основе битовых полей
 
-[![Build Status](https://travis-ci.org/UNN-ITMM-Software/mp2-lab1-set.svg)][travis]
+[![Build Status](https://travis-ci.org/UNN-VMK-Software/mp2-lab1-set.svg)][travis]
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)][gitter]
 
 <!-- TODO
   -
 -->
-
-## Новости
-
-  - 2015-10-02
-    - Создан [Gitter-чат][gitter], в котором можно задавать вопросы про выполнение лабораторных работ
-  - 2015-09-25
-    - Опубликованы [видеозаписи][youtube-playlist] с живой демонстрацией Git и
-      Google Test.
-    - Опубликованы [слайды][slides] с лекций про Git и Google Test.
 
 ## Цели и задачи
 
@@ -135,10 +126,10 @@ __Цель данной работы__  — разработка структу�
 [git]:         https://git-scm.com/book/ru/v2
 [gtest]:       https://github.com/google/googletest
 [sieve]:       http://habrahabr.ru/post/91112
-[travis]:      https://travis-ci.org/UNN-ITMM-Software/mp2-lab1-set
-[git-guide]:   https://github.com/UNN-ITMM-Software/mp2-lab1-set/blob/master/docs/part1-git.md
-[gtest-guide]: https://github.com/UNN-ITMM-Software/mp2-lab1-set/blob/master/docs/part2-google-test.md
+[travis]:      https://travis-ci.org/UNN-VMK-Software/mp2-lab1-set
+[git-guide]:   https://github.com/ValentinV95/mp2-lab1-set/blob/master/docs/part1-git.md
+[gtest-guide]: https://github.com/ValentinV95/mp2-lab1-set/blob/master/docs/part2-google-test.md
 [youtube-playlist]: https://www.youtube.com/playlist?list=PLSzOhsr5tmhrgV7u7CSzX4Ki1a9r0AKzV
-[slides]:      https://github.com/UNN-ITMM-Software/mp2-lab1-set/tree/master/docs/slides
-[upstream]:    https://github.com/UNN-ITMM-Software/mp2-lab1-set
+[slides]:      https://github.com/ValentinV95/mp2-lab1-set/tree/master/docs/slides
+[upstream]:    https://github.com/ValentinV95/mp2-lab1-set
 [gitter]:      https://gitter.im/UNN-VMK-Software/mp2-lab1-set

@@ -54,7 +54,7 @@ int main()
 
 #include "tset.h"
 
-int main()
+int main1()
 {
   int n, m, k, count;
 
