@@ -1,6 +1,0 @@
-# ninja log v5
-1	277	1663656572285045438	src/CMakeFiles/set.dir/tbitfield.cpp.o	12e916bed750e71d
-280	309	1663656572315045273	lib/libset.a	596776a663866292
-1	280	1663656572288378753	src/CMakeFiles/set.dir/tset.cpp.o	9d555d895e7b2953
-1	312	1663656572321711903	samples/CMakeFiles/sample_prime_numbers.dir/sample_prime_numbers.cpp.o	2a5486d08148a768
-312	375	1663656572381711574	bin/sample_prime_numbers	dc04281e3c075378
