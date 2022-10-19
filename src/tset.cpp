@@ -40,19 +40,19 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
   return maxPower;
 }
 
-int TSet::IsMember(const int Elem) const // элемент множества?
+int TSet::IsMember(const int elem) const // элемент множества?
 {
-  return bitField.GetBit(Elem);
+  return bitField.GetBit(elem);
 }
 
-void TSet::InsElem(const int Elem) // включение элемента множества
+void TSet::InsElem(const int elem) // включение элемента множества
 {
-  bitField.SetBit(Elem);
+  bitField.SetBit(elem);
 }
 
-void TSet::DelElem(const int Elem) // исключение элемента множества
+void TSet::DelElem(const int elem) // исключение элемента множества
 {
-  bitField.ClrBit(Elem);
+  bitField.ClrBit(elem);
 }
 
 // теоретико-множественные операции
@@ -80,15 +80,15 @@ TSet TSet::operator+(const TSet& s) // объединение
   return res;
 }
 
-TSet TSet::operator+(const int Elem) // объединение с элементом
+TSet TSet::operator+(const int elem) // объединение с элементом
 {
-  bitField.SetBit(Elem);
+  bitField.SetBit(elem);
   return *this;
 }
 
-TSet TSet::operator-(const int Elem) // разность с элементом
+TSet TSet::operator-(const int elem) // разность с элементом
 {
-  TSet res(bitField & Elem);
+  TSet res(bitField & elem);
   return res;
 }
 
