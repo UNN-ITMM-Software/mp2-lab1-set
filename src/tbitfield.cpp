@@ -6,51 +6,78 @@
 // Битовое поле
 
 #include "tbitfield.h"
+#include <exception>
 
-// Fake variables used as placeholders in tests
+
 static const int FAKE_INT = -1;
 static TBitField FAKE_BITFIELD(1);
 
-TBitField::TBitField(int len)
+TBitField::TBitField(int len): BitLen(len)
 {
+    if (len <= 0)
+        throw exception("incorrect len value! it must be positive!");
+    if ((BitLen & (Bits_in_elem - 1)) == 0)
+        MemLen = BitLen >> shift_size;
+    else
+        MemLen = (BitLen >> shift_size) + 1;
+    pMem = new TELEM[MemLen]();
 }
 
-TBitField::TBitField(const TBitField &bf) // конструктор копирования
+TBitField::TBitField(const TBitField &bf): BitLen(bf.BitLen), MemLen(bf.MemLen) // конструктор копирования
 {
+    pMem = new TELEM[MemLen];
+    for (int i = 0; i < MemLen; i++)
+        pMem[i] = bf.pMem[i];
 }
 
 TBitField::~TBitField()
 {
+    delete[] pMem;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-    return FAKE_INT;
+    if (n <= 0 || n >= BitLen)
+        throw exception("Incorrect pos value!");
+    return n >> shift_size;
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-    return FAKE_INT;
+    if (n <= 0 || n >= BitLen)
+        throw exception("Incorrect pos value!");
+    return 1<<(n & (Bits_in_elem - 1));
 }
 
 // доступ к битам битового поля
 
 int TBitField::GetLength(void) const // получить длину (к-во битов)
 {
-  return FAKE_INT;
+    return BitLen;
 }
 
 void TBitField::SetBit(const int n) // установить бит
 {
+    if (n <= 0 || n >= BitLen)
+        throw exception("Incorrect pos value!");
+    pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
+    if (n <= 0 || n >= BitLen)
+        throw exception("Incorrect pos value!");
+    pMem[GetMemIndex(n)] &= ~(GetMemMask(n));
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
-  return FAKE_INT;
+    if (n <= 0 || n >= BitLen)
+        throw exception("Incorrect pos value!");
+    if ((pMem[GetMemIndex(n)] & GetMemMask(n)) == 0)
+        return 0;
+    else
+        return 1;
 }
 
 // битовые операции
