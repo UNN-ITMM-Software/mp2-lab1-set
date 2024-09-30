@@ -23,7 +23,7 @@
   1. Создать аккаунт на [github.com](https://github.com), если такой
      отсутствует. Для определенности обозначим аккаунт `GITHUB-ACCOUNT`.
 
-  1. Открыть в браузере репозиторий по адресу <https://github.com/UNN-VMK-Software/mp2-lab1-set>.
+  1. Открыть в браузере репозиторий по адресу <https://github.com/UNN-ITMM-Software/mp2-lab1-set>.
 
   1. Сделать fork [репозитория][upstream] c проектом-шаблоном (в терминологии
      Git `upstream`-репозиторий) к себе в личный профиль с названием
@@ -122,4 +122,4 @@
 
 <!-- LINKS -->
 
-[upstream]:   https://github.com/UNN-VMK-Software/mp2-lab1-set
+[upstream]:   https://github.com/UNN-ITMM-Software/mp2-lab1-set
