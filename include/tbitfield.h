@@ -21,8 +21,7 @@ private:
   int  BitLen; // длина битового поля - макс. к-во битов
   TELEM *pMem; // память для представления битового поля
   int  MemLen;// к-во эл-тов Мем для представления бит.поля
-  int Bits_in_elem = numeric_limits<TELEM>::digits;
-  int shift_size = 3;//ругается на bit_width????
+  int Bits_in_elem = numeric_limits<TELEM>::digits;//кол-во бит, необходимых для представления TELEM в памяти
   // методы реализации
   int   GetMemIndex(const int n) const; // индекс в pМем для бита n       (#О2)
   TELEM GetMemMask (const int n) const; // битовая маска для бита n       (#О3)

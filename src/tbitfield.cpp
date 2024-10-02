@@ -7,15 +7,13 @@
 
 #include "tbitfield.h"
 
-//static const int FAKE_INT = -1;
-//static TBitField FAKE_BITFIELD(1);
 
 TBitField::TBitField(int len)
 {
     if (len <= 0)
         throw "Incorrect length!";
     BitLen = len;
-    if (BitLen % 8 == 0)
+    if (BitLen % Bits_in_elem == 0)
         MemLen = BitLen / Bits_in_elem;
     else
         MemLen = (BitLen / Bits_in_elem) + 1;
@@ -82,15 +80,18 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
-    BitLen = bf.BitLen;
-    if (MemLen != bf.MemLen)
+    if (*this != bf)
     {
-        MemLen = bf.MemLen;
-        delete[] pMem;
-        pMem = new TELEM[MemLen];
+        BitLen = bf.BitLen;
+        if (MemLen != bf.MemLen)
+        {
+            MemLen = bf.MemLen;
+            delete[] pMem;
+            pMem = new TELEM[MemLen];
+        }
+        for (int i = 0; i < MemLen; i++)
+            pMem[i] = bf.pMem[i];
     }
-    for (int i = 0; i < MemLen; i++)
-        pMem[i] = bf.pMem[i];
     return *this;
 }
 
