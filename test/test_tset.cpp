@@ -295,3 +295,56 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, check_multiple_combination)
+{
+	TSet set1(4), set2(5), set3(6), expSet(6);
+	// set1 = {1, 3}
+	set1.InsElem(1);
+	set1.InsElem(3);
+
+	//set2 = {0, 3, 4}
+	set2.InsElem(0);
+	set2.InsElem(3);
+	set2.InsElem(4);
+
+	//set3 = {1, 2}
+	set3.InsElem(1);
+	set3.InsElem(2);
+	
+	// expSet = {0, 1, 2, 3, 4}
+	expSet.InsElem(0);
+	expSet.InsElem(1);
+	expSet.InsElem(2);
+	expSet.InsElem(3);
+	expSet.InsElem(4);
+
+	EXPECT_EQ(expSet, set1 + set2 + set3);
+}
+
+TEST(TSet, check_multiple_intersection)
+{
+	TSet set1(4), set2(5), set3(6), expSet(6);
+	// set1 = {1, 3}
+	set1.InsElem(1);
+	set1.InsElem(3);
+
+	//set2 = {0, 1, 3, 4}
+	set2.InsElem(0);
+	set2.InsElem(1);
+	set2.InsElem(3);
+	set2.InsElem(4);
+
+	//set3 = {1, 2, 3, 5}
+	set3.InsElem(1);
+	set3.InsElem(2);
+	set3.InsElem(3);
+	set3.InsElem(5);
+
+	// expSet = {1, 3}
+	expSet.InsElem(1);
+	expSet.InsElem(3);
+
+	EXPECT_EQ(expSet, set1 * set2 * set3);
+}
+

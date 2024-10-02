@@ -255,16 +255,16 @@ TEST(TBitField, invert_plus_and_operator_on_different_size_bitfield)
 {
   const int firstSze = 4, secondSize = 8;
   TBitField firstBf(firstSze), negFirstBf(firstSze), secondBf(secondSize), testBf(secondSize);
-  // firstBf = 0001
+  // firstBf = 0001 - 1000
   firstBf.SetBit(0);
   negFirstBf = ~firstBf;
-  // negFirstBf = 1110
+  // negFirstBf = 1110 - 0111
 
   // secondBf = 00011000
   secondBf.SetBit(3);
   secondBf.SetBit(4);
 
-  // testBf = 00001000
+  // testBf = 00001000 - 00010000
   testBf.SetBit(3);
 
   EXPECT_EQ(secondBf & negFirstBf, testBf);
@@ -308,4 +308,76 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   bf2.SetBit(2);
 
   EXPECT_NE(bf1, bf2);
+}
+
+TEST(TBitField, double_bit_clearing)
+{
+    TBitField bf(10);
+    
+    bf.SetBit(5);
+
+    bf.ClrBit(5);
+    bf.ClrBit(5);
+
+    EXPECT_EQ(0, bf.GetBit(5));
+}
+
+TEST(TBitField, double_bit_setting)
+{
+    TBitField bf(10);
+
+    bf.SetBit(5);
+    bf.SetBit(5);
+
+    EXPECT_EQ(1, bf.GetBit(5));
+}
+
+TEST(TBitField, or_operation_on_three_bitfields)
+{
+    TBitField bf1(4), bf2(5), bf3(6), Result(6);
+
+    bf1.SetBit(0);
+    //bf1 = 1000
+
+    bf2.SetBit(0);
+    bf2.SetBit(2);
+    //bf2 = 10100
+
+    bf3.SetBit(4);
+    bf3.SetBit(5);
+    //bf3 = 000011
+
+    Result.SetBit(0);
+    Result.SetBit(2);
+    Result.SetBit(4);
+    Result.SetBit(5);
+    //Result = 101011
+
+    EXPECT_EQ(Result, bf3 | bf2 | bf1);
+}
+
+TEST(TBitField, and_operation_on_three_bitfields)
+{
+    TBitField bf1(4), bf2(5), bf3(6), Result(6);
+
+    bf1.SetBit(0);
+    bf1.SetBit(3);
+    //bf1 = 1001
+
+    bf2.SetBit(0);
+    bf2.SetBit(2);
+    bf2.SetBit(3);
+    //bf2 = 10110
+
+    bf3.SetBit(2);
+    bf3.SetBit(3);
+    bf3.SetBit(4);
+    bf3.SetBit(5);
+    //bf3 = 001111
+
+    Result.SetBit(3);
+    //Result.SetBit(5);
+    //Result = 000100
+
+    EXPECT_EQ(Result, bf1 & bf2 & bf3);
 }

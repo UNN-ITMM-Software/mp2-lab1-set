@@ -1,0 +1,14 @@
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/src/CMakeFiles/set.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/src/CMakeFiles/edit_cache.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/src/CMakeFiles/rebuild_cache.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/samples/CMakeFiles/sample_prime_numbers.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/samples/CMakeFiles/edit_cache.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/samples/CMakeFiles/rebuild_cache.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/gtest/CMakeFiles/gtest.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/gtest/CMakeFiles/edit_cache.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/gtest/CMakeFiles/rebuild_cache.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/test/CMakeFiles/test_set.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/test/CMakeFiles/edit_cache.dir
+D:/Git/University/Coding_3/mp2-lab1-set/out/build/x64-Debug/test/CMakeFiles/rebuild_cache.dir
