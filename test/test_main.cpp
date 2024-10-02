@@ -1,4 +1,5 @@
 #include <gtest.h>
+#include"tbitfield.h"
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
