@@ -7,8 +7,7 @@
 
 #include "tset.h"
 
-
-TSet::TSet(int mp):BitField(TBitField(mp))
+TSet::TSet(int mp) :BitField(TBitField(mp))
 {
     if (mp <= 0)
         throw "Incorrect length for set!";
@@ -16,7 +15,7 @@ TSet::TSet(int mp):BitField(TBitField(mp))
 }
 
 // конструктор копирования
-TSet::TSet(const TSet &s): BitField(TBitField(s.BitField))
+TSet::TSet(const TSet& s) : BitField(TBitField(s.BitField))
 {
     MaxPower = s.GetMaxPower();
 }
@@ -59,7 +58,6 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 }
 
 // теоретико-множественные операции
-
 TSet& TSet::operator=(const TSet &s) // присваивание
 {
     if (*this != s)
@@ -124,7 +122,6 @@ TSet TSet::operator~(void) // дополнение
 }
 
 // перегрузка ввода/вывода
-
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
     istr >> s.BitField;

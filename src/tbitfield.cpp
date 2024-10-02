@@ -7,7 +7,6 @@
 
 #include "tbitfield.h"
 
-
 TBitField::TBitField(int len)
 {
     if (len <= 0)
@@ -47,7 +46,6 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 }
 
 // доступ к битам битового поля
-
 int TBitField::GetLength(void) const // получить длину (к-во битов)
 {
     return BitLen;
@@ -77,7 +75,6 @@ int TBitField::GetBit(const int n) const // получить значение б
 }
 
 // битовые операции
-
 TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
     if (*this != bf)
@@ -166,7 +163,6 @@ TBitField TBitField::operator~(void) // отрицание
 }
 
 // ввод/вывод
-
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
     int input;
