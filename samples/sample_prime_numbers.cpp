@@ -6,13 +6,15 @@
 // Тестирование битового поля и множества
 
 #include <iomanip>
+#include "tbitfield.h"
+#include "tset.h"
 
-// #define USE_SET // Использовать класс TSet,
+ //#define USE_SET // Использовать класс TSet,
                 // закоментировать, чтобы использовать битовое поле
 
 #ifndef USE_SET // Использовать класс TBitField
 
-#include "tbitfield.h"
+
 
 int main()
 {
@@ -35,7 +37,7 @@ int main()
         if (s.GetBit(k))
           s.ClrBit(k);
   // оставшиеся в s элементы - простые числа
-  cout << endl << "Печать множества некратных чисел" << endl << s << endl;
+ // cout << endl << "Печать множества некратных чисел" << endl << s << endl;
   cout << endl << "Печать простых чисел" << endl;
   count = 0;
   k = 1;
