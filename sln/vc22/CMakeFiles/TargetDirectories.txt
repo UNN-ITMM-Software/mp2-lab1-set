@@ -1,0 +1,6 @@
+C:/Users/User/Desktop/Новая папка/mp2-lab1-set/sln/vc22/CMakeFiles/ALL_BUILD.dir
+C:/Users/User/Desktop/Новая папка/mp2-lab1-set/sln/vc22/CMakeFiles/ZERO_CHECK.dir
+C:/Users/User/Desktop/Новая папка/mp2-lab1-set/sln/vc22/src/CMakeFiles/set.dir
+C:/Users/User/Desktop/Новая папка/mp2-lab1-set/sln/vc22/samples/CMakeFiles/sample_prime_numbers.dir
+C:/Users/User/Desktop/Новая папка/mp2-lab1-set/sln/vc22/gtest/CMakeFiles/gtest.dir
+C:/Users/User/Desktop/Новая папка/mp2-lab1-set/sln/vc22/test/CMakeFiles/test_set.dir
