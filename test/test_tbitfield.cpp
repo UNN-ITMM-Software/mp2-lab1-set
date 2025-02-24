@@ -24,6 +24,7 @@ TEST(TBitField, new_bitfield_is_set_to_zero)
     sum += bf.GetBit(i);
   }
 
+
   EXPECT_EQ(0, sum);
 }
 
