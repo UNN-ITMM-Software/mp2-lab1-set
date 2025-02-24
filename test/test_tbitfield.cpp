@@ -285,7 +285,6 @@ TEST(TBitField, can_invert_many_random_bits_bitfield)
 
   for (unsigned int i = 0; i < bits.size(); i++)
     bf.SetBit(bits[i]);
-
   negBf = ~bf;
 
   for(int i = 0; i < size; i++)
