@@ -30,7 +30,6 @@ TEST(TBitField, new_bitfield_is_set_to_zero)
 TEST(TBitField, can_set_bit)
 {
   TBitField bf(10);
-
   EXPECT_EQ(0, bf.GetBit(3));
 
   bf.SetBit(3);
@@ -105,6 +104,7 @@ TEST(TBitField, can_assign_bitfields_of_equal_size)
   {
     bf1.SetBit(i);
   }
+
   bf2 = bf1;
 
   EXPECT_NE(0, bf2.GetBit(0));
@@ -306,6 +306,5 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   bf2.SetBit(1);
   bf2.SetBit(2);
-
   EXPECT_NE(bf1, bf2);
 }
