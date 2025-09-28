@@ -153,3 +153,4 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
     }
         return ostr;
 }
+
