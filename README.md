@@ -139,3 +139,6 @@ __Цель данной работы__  — разработка структу�
 [slides]:      https://github.com/UNN-ITMM-Software/mp2-lab1-set/tree/master/docs/slides
 [upstream]:    https://github.com/UNN-ITMM-Software/mp2-lab1-set
 [gitter]:      https://gitter.im/UNN-VMK-Software/mp2-lab1-set
+
+
+Выполнил: Петраков Илья
