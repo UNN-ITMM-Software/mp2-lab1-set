@@ -6,6 +6,10 @@ TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));
 }
+TEST(TBitField, can_create_bitfield_with_negative_length)
+{
+    ASSERT_ANY_THROW(TBitField bf(-1));
+}
 
 TEST(TBitField, can_get_length)
 {
@@ -308,4 +312,36 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   bf2.SetBit(2);
 
   EXPECT_NE(bf1, bf2);
+}
+
+TEST(TBitField, double_inverting_returns_original) {
+    const int size = 10;
+    TBitField bf1(size), bf2(size);
+
+    bf1.GenerateRandom(bf1);
+
+    bf2 = ~(~bf1);
+    EXPECT_EQ(bf1, bf2);
+}
+TEST(TBitField, random_fill) {
+    TBitField bf(10);
+    bf.GenerateRandom(bf);
+    cout << bf << endl;
+    EXPECT_NO_THROW();
+}
+TEST(TBitField, De_Morgans_law_1) {
+    const int size = 10;
+    TBitField a(size), b(size), c(size);
+    a.GenerateRandom(a);
+    b.GenerateRandom(b);
+    c.GenerateRandom(c);
+    EXPECT_EQ((a & b) | (a & c), a & (b | c));
+}
+TEST(TBitField, De_Morgans_law_2) {
+    const int size = 10;
+    TBitField a(size), b(size), c(size);
+    a.GenerateRandom(a);
+    b.GenerateRandom(b);
+    c.GenerateRandom(c);
+    EXPECT_EQ((a | b) & (a | c), a | (b & c));
 }

@@ -36,8 +36,8 @@ public:
   int  GetBit(const int n) const; // получить значение бита               (#Л1)
 
   // битовые операции
-  int operator==(const TBitField &bf) const; // сравнение                 (#О5)
-  int operator!=(const TBitField &bf) const; // сравнение
+  bool operator==(const TBitField &bf) const; // сравнение                 (#О5)
+  bool operator!=(const TBitField &bf) const; // сравнение
   TBitField& operator=(const TBitField &bf); // присваивание              (#П3)
   TBitField  operator|(const TBitField &bf); // операция "или"            (#О6)
   TBitField  operator&(const TBitField &bf); // операция "и"              (#Л2)
@@ -45,7 +45,10 @@ public:
 
   friend istream &operator>>(istream &istr, TBitField &bf);       //      (#О7)
   friend ostream &operator<<(ostream &ostr, const TBitField &bf); //      (#П4)
+
+  void GenerateRandom(TBitField& bf);
 };
+
 // Структура хранения битового поля
 //   бит.поле - набор битов с номерами от 0 до BitLen
 //   массив pМем рассматривается как последовательность MemLen элементов

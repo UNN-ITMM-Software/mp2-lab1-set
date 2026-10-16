@@ -26,8 +26,8 @@ public:
   void DelElem(const int Elem);       // удалить элемент из множества
   int IsMember(const int Elem) const; // проверить наличие элемента в множестве
   // теоретико-множественные операции
-  int operator== (const TSet &s) const; // сравнение
-  int operator!= (const TSet &s) const; // сравнение
+  bool operator== (const TSet &s) const; // сравнение
+  bool operator!= (const TSet &s) const; // сравнение
   TSet& operator=(const TSet &s);  // присваивание
   TSet operator+ (const int Elem); // объединение с элементом
                                    // элемент должен быть из того же универса
@@ -39,5 +39,7 @@ public:
 
   friend istream &operator>>(istream &istr, TSet &bf);
   friend ostream &operator<<(ostream &ostr, const TSet &bf);
+
+  void GenerateRandom(TSet& s);
 };
 #endif

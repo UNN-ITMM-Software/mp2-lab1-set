@@ -295,3 +295,26 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, random_fill) {
+	const int size = 10;
+	TSet set(size);
+	set.GenerateRandom(set);
+	cout << set;
+	EXPECT_NO_THROW();
+}
+TEST(TSet, De_Morgans_law_1) {
+    const int size = 10;
+    TSet a(size), b(size), c(size);
+    a.GenerateRandom(a);
+    b.GenerateRandom(b);
+    c.GenerateRandom(c);
+    EXPECT_EQ((a * b) + (a * c), a * (b + c));
+}
+TEST(TSet, De_Morgans_law_2) {
+    const int size = 10;
+    TSet a(size), b(size), c(size);
+    a.GenerateRandom(a);
+    b.GenerateRandom(b);
+    c.GenerateRandom(c);
+    EXPECT_EQ((a + b) * (a + c), a + (b * c));
+}

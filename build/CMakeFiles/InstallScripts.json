@@ -1,0 +1,11 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/CARDS/mp2-lab1-set/build/cmake_install.cmake",
+		"C:/CARDS/mp2-lab1-set/build/src/cmake_install.cmake",
+		"C:/CARDS/mp2-lab1-set/build/samples/cmake_install.cmake",
+		"C:/CARDS/mp2-lab1-set/build/gtest/cmake_install.cmake",
+		"C:/CARDS/mp2-lab1-set/build/test/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
